@@ -1,5 +1,7 @@
 import HomePage from "./HomePage";
 import CatalogPage from "./CatalogPage";
+import { Route, Routes } from "react-router-dom";
+import SignInPage from "../SignInPage";
 
 
 function MainContent():JSX.Element{
@@ -7,8 +9,20 @@ function MainContent():JSX.Element{
 
     return (
         <div>
-            < HomePage />
-            < CatalogPage />
+            <Routes>
+                <Route
+                path = "/"
+                element = {<HomePage/>}/>
+                
+                <Route
+                path = "/catalog"
+                element = {<CatalogPage/>}/>
+
+                <Route
+                path = "/signIn"
+                element = {<SignInPage/>}/>
+            </Routes>
+            
         </div>
         
     )

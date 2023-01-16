@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom"
 
 
 function AppHeader():JSX.Element{
     return(
         <nav> 
-            <a> HOME </a>
-            <a> CATALOG </a>
-            <a> SIGN-IN </a>
+            <Link to = "/"> HOME </Link>
+            <Link to = "/catalog"> CATALOG </Link>
+            <Link to = "/signIn"> SIGN-IN </Link>
         </nav> 
 
 
