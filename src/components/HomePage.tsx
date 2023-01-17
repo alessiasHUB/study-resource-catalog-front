@@ -1,11 +1,5 @@
-
-
-function HomePage():JSX.Element{
-
-    return(
-        <> Home Page </>
-    )
+function HomePage(): JSX.Element {
+  return <> Home Page </>;
 }
 
-
-export default HomePage
+export default HomePage;
