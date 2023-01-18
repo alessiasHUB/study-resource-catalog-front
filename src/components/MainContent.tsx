@@ -5,26 +5,23 @@ import SignInPage from "./SignInPage";
 import axios from "axios";
 import { userData } from "../utils/interfaces";
 import { useCallback, useEffect, useState } from "react";
+import { url } from "../utils/url";
 
 function MainContent(): JSX.Element {
-  const [users, setUsers] = useState<userData[]>([])
-  const [signedInUser, setSignedInUser] = useState<string|undefined>() 
+  const [users, setUsers] = useState<userData[]>([]);
+  const [signedInUser, setSignedInUser] = useState<string | undefined>();
   //signedinuser to be used in top corner of navbar after it has been assigned ---> may need to pass this state from App down to SigninPage instead***
-  const url =
-    process.env.NODE_ENV === "production"
-      ? "https://study-resource-catalog.onrender.com/"
-      : "http://localhost:4000";
 
   const fetchAndStoreUsers = useCallback(async () => {
-    const response = await axios.get(`${url}/users`)
-    let userData: userData[] = response.data
-    console.log(userData)
-    setUsers(userData)
-  }, [url]);
+    const response = await axios.get(`${url}/users`);
+    let userData: userData[] = response.data;
+    console.log(userData);
+    setUsers(userData);
+  }, []);
 
-  useEffect (() => {
-    fetchAndStoreUsers()
-  }, [fetchAndStoreUsers])
+  useEffect(() => {
+    fetchAndStoreUsers();
+  }, [fetchAndStoreUsers]);
 
   return (
     <>
@@ -34,7 +31,12 @@ function MainContent(): JSX.Element {
 
           <Route path="/catalog" element={<CatalogPage />} />
 
-          <Route path="/signIn" element={<SignInPage userData={users} setSignedInUser={setSignedInUser}/>} />
+          <Route
+            path="/signIn"
+            element={
+              <SignInPage userData={users} setSignedInUser={setSignedInUser} />
+            }
+          />
         </Routes>
       </div>
     </>
