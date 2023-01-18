@@ -7,10 +7,13 @@ interface SignInProps {
 }
 
 function SignInPage(props: SignInProps): JSX.Element {
-  const [selectedUser, setSelectedUser] = useState<string | undefined>()
+  const [selectedUser, setSelectedUser] = useState<string | undefined>("allithatgalli")
   function handleSignIn() {
-    if(selectedUser !== undefined) {
+    if(selectedUser !== "Select user...") {
       props.setSignedInUser(selectedUser)
+    }
+    else{
+      alert("You haven't selected a user...")
     }
     console.log("signed in as: ", selectedUser)
   }
