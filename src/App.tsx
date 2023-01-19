@@ -36,7 +36,7 @@ function App() {
         <Route
           path="/signIn"
           element={
-            <SignInPage IUserData={users} setSignedInUser={setSignedInUser} />
+            <SignInPage userData={users} setSignedInUser={setSignedInUser} />
           }
         />
         <Route path="/study_list" element={<StudyListPage />} />
