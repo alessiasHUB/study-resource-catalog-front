@@ -1,11 +1,10 @@
-//rename as userDataI to signal userdata as interface
-export interface userData {
+interface IUserData {
   id: number;
   username: string;
   isFaculty: boolean;
 }
-//you should se me now
-export interface resourceDataI {
+
+interface IResourceData {
   description: string;
   dislikes: number;
   id: number;
@@ -18,3 +17,33 @@ export interface resourceDataI {
   usage: string;
   user_id: number;
 }
+
+interface ICommentData {
+  id: number;
+  resource_id: number;
+  user_id: number;
+  text: string;
+  post_date: Date;
+}
+
+interface ILikesData {
+  id: number;
+  resource_id: number;
+  user_id: number;
+  liked: boolean;
+}
+
+interface IStudyListData {
+  id: number;
+  resource_id: number;
+  user_id: number;
+  post_date: Date;
+}
+
+export type {
+  IUserData,
+  IResourceData,
+  ICommentData,
+  ILikesData,
+  IStudyListData,
+};
