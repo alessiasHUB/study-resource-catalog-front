@@ -5,13 +5,19 @@ interface NavBarProps {
 function NavBar(props: NavBarProps): JSX.Element {
   return (
     <nav>
-      <Link to="/"> HOME </Link>
-      <Link to="/catalog"> CATALOG </Link>
-      <Link to="/signIn"> SIGN-IN </Link>
       {props.signedInUser !== undefined ? (
-        <p>{props.signedInUser}</p>
+        <>
+          <Link to="/"> HOME </Link>
+          <Link to="/catalog"> CATALOG </Link>
+          <Link to="/study_list"> STUDY LIST </Link>
+          <p>{props.signedInUser}</p>
+        </>
       ) : (
-        <Link to="/signIn"> sign in please </Link>
+        <>
+          <Link to="/"> HOME </Link>
+          <Link to="/catalog"> CATALOG </Link>
+          <Link to="/signIn"> SIGN-IN </Link>
+        </>
       )}
     </nav>
   );
