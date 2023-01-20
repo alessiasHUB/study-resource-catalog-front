@@ -4,7 +4,7 @@ import { tagsArr } from "../utils/tags";
 import { useState } from "react";
 
 export default function AddResourcePage(): JSX.Element {
-  const [tags, setTags] = useState<string[]>([]);
+  //const [tags, setTags] = useState<string[]>([]);  ------------------------replaced by dropdown
 
   const handleSubmitResource = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,21 +16,26 @@ export default function AddResourcePage(): JSX.Element {
     const description = e.currentTarget.elements.namedItem(
       "description"
     ) as HTMLInputElement;
-    // const tags = e.currentTarget.elements.namedItem("tags") as HTMLInputElement;
-    // const types = e.currentTarget.elements.namedItem("types") as HTMLInputElement;
-    // const usage = e.currentTarget.elements.namedItem("usage") as HTMLInputElement;
+    const tags = e.currentTarget.elements.namedItem("tags") as HTMLInputElement;
+    const type = e.currentTarget.elements.namedItem("type") as HTMLInputElement;
+    const usage = e.currentTarget.elements.namedItem(
+      "usage"
+    ) as HTMLInputElement;
 
     const resourceForm = {
       title: title.value,
       link: link.value,
       description: description.value,
-      // types: types.value,
-      // usage: usage.value,
-      tags: tags,
+      type: type.value,
+      usage: usage.value,
+      tags: tags.value,
     };
     console.log(resourceForm);
-    setTags([]);
+    //setTags([]);
   };
+  // const handleAddTag= (el: string) => {
+  //  setTags([el, ...tags])
+  // }
 
   return (
     <>
@@ -39,14 +44,33 @@ export default function AddResourcePage(): JSX.Element {
         <input placeholder="title" type="text" id="title" required />
         <input placeholder="link" type="text" id="link" required />
         <textarea placeholder="description" id="description" required />
-        {tagsArr.map((el, i) => (
-          <button key={i} onClick={() => setTags((prev) => [...prev])}>
+        {/* {tagsArr.map((el, i) => ( ------------------------------------------replaced by select tags below :(
+          <button key={i} onClick={() => setTags([...tags])}>
             {el}
           </button>
-        ))}
-        {/*<select id="type">{typesArr.map((el, index) => <option value={el} key={index}>{el}</option>)}</select>
-        <select id="usage">{usageArr.map((el, index) => <option value={el} key={index}>{el}</option>)}</select>
-       */}{" "}
+        ))} */}
+        <select id="tags">
+          {tagsArr.map((el, index) => (
+            <option value={el} key={index}>
+              {el}
+            </option>
+          ))}
+        </select>
+        <select id="type">
+          {typesArr.map((el, index) => (
+            <option value={el} key={index}>
+              {el}
+            </option>
+          ))}
+        </select>
+        <select id="usage">
+          {usageArr.map((el, index) => (
+            <option value={el} key={index}>
+              {el}
+            </option>
+          ))}
+        </select>
+
         <button type="submit">SUBMIT</button>
       </form>
     </>
