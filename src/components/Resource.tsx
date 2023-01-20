@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
-import { IResourceData } from "../utils/interfaces";
+import { IResourceData, IUserData } from "../utils/interfaces";
 import { url } from "../utils/url";
 
 interface ResourceProps {
   resourceData: IResourceData;
+  signedInUser: IUserData | undefined
+  fetchAndStoreResources: () => Promise<void>
 }
 
-function Resource({ resourceData }: ResourceProps): JSX.Element {
+function Resource({ resourceData, signedInUser, fetchAndStoreResources }: ResourceProps): JSX.Element {
   const [isFullView, setIsFullView] = useState<boolean>(false);
 
   const handleFullViewClicked = () => {
@@ -26,9 +28,19 @@ function Resource({ resourceData }: ResourceProps): JSX.Element {
     }
   }
 
-  // async function handleLikeClick () {
-  //   const response = axios.post(url + "/likes/" + resourceData.id + "/" + )
-  // }
+  async function handleLikeClick() {
+    if (signedInUser !== undefined) {
+      await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}/true`)
+    }
+  fetchAndStoreResources()
+  }
+
+  async function handleDislikeClick() {
+    if (signedInUser !== undefined) {
+      await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}/false`)
+    }
+    fetchAndStoreResources()
+  }
 
   return (
     <div className="ctn-resource">
@@ -72,8 +84,12 @@ function Resource({ resourceData }: ResourceProps): JSX.Element {
       <div className="resource-link-btn">
         <a href={resourceData.link}>Check it out</a>
       </div>
-      <button className="like-resource-btn">👍</button>
-      <button className="dislike-resource-btn">👎</button>
+      {signedInUser !== undefined &&
+        <div>
+          <button className="like-resource-btn" onClick={handleLikeClick}>👍|{resourceData.likes}</button>
+          <button className="dislike-resource-btn" onClick={handleDislikeClick}>👎|{resourceData.dislikes}</button>
+        </div>
+      }
 
       <button className="full-view-btn" onClick={handleFullViewClicked}>
         Full View

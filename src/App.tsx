@@ -33,7 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
 
-        <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/catalog" element={<CatalogPage signedInUser={signedInUser}/>} />
 
         <Route
           path="/signIn"
