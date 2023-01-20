@@ -23,13 +23,12 @@ function CatalogPage(): JSX.Element {
   }, [fetchAndStoreResources]);
 
   return (
-  <> 
-  {resources.length > 0 && resources.map(resource => {
-    return (
-      <Resource resourceData={resource}/>
-    )
-  })}
-  </>
+    <>
+      {resources.length > 0 &&
+        resources.map((resource) => {
+          return <Resource resourceData={resource} />;
+        })}
+    </>
   );
 }
 
