@@ -15,29 +15,27 @@ function Resource({ resourceData }: ResourceProps): JSX.Element {
   };
 
   //-----------------------------------put this function into utils
-function evaluateUsage (resourceUsage: string) {
-  switch(resourceUsage) {
-    case "rec used":
-      return "🌟"
+  function evaluateUsage(resourceUsage: string) {
+    switch (resourceUsage) {
+      case "rec used":
+        return "🌟";
       case "no rec used":
-        return "💩"
-    case "not used promise":
-      return "🔍"
+        return "💩";
+      case "not used promise":
+        return "🔍";
+    }
   }
-}
 
-// async function handleLikeClick () {
-//   const response = axios.post(url + "/likes/" + resourceData.id + "/" + )
-// }
-
-
+  // async function handleLikeClick () {
+  //   const response = axios.post(url + "/likes/" + resourceData.id + "/" + )
+  // }
 
   return (
     <div className="ctn-resource">
       <p className="resource-title">{resourceData.title}</p>
       <p className="resource-post-date">{String(resourceData.post_date)}</p>
 
-<p>{evaluateUsage(resourceData.usage)}</p>
+      <p>{evaluateUsage(resourceData.usage)}</p>
 
       <p className="resource-type">{resourceData.type}</p>
 

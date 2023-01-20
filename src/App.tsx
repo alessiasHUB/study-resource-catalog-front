@@ -26,7 +26,7 @@ function App() {
     fetchAndStoreUsers();
   }, [fetchAndStoreUsers]);
 
-  console.log("signedIn user", signedInUser)
+  console.log("signedIn user", signedInUser);
   return (
     <div className="App">
       <NavBar signedInUser={signedInUser?.username} />

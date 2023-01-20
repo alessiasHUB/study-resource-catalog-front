@@ -19,8 +19,13 @@ function SignInPage(props: SignInProps): JSX.Element {
     console.log("signed in as: ", selectedUser);
   }
 
-  function getUserFromUsername (username: string, userDataArr: IUserData[]): IUserData {
-    const filteredArr =  userDataArr.filter(user => user.username === username);
+  function getUserFromUsername(
+    username: string,
+    userDataArr: IUserData[]
+  ): IUserData {
+    const filteredArr = userDataArr.filter(
+      (user) => user.username === username
+    );
     return filteredArr[0];
   }
 

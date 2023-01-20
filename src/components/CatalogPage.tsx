@@ -22,14 +22,14 @@ function CatalogPage(): JSX.Element {
 
   return (
     <>
-    <div className="ctn-resource-usage-key">
-      <p> Used and recommended = 🌟</p>
-      <p> Not used but recommended = 🔎</p>
-      <p>Not recommended = 💩</p>
-    </div>
+      <div className="ctn-resource-usage-key">
+        <p> Used and recommended = 🌟</p>
+        <p> Not used but recommended = 🔎</p>
+        <p>Not recommended = 💩</p>
+      </div>
       {resources.length > 0 &&
         resources.map((resource) => {
-          return <Resource resourceData={resource} key={resource.id}/>;
+          return <Resource resourceData={resource} key={resource.id} />;
         })}
     </>
   );
