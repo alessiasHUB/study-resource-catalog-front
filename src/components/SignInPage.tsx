@@ -3,7 +3,7 @@ import { IUserData } from "../utils/interfaces";
 
 interface SignInProps {
   userData: IUserData[];
-  setSignedInUser: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setSignedInUser: React.Dispatch<React.SetStateAction<IUserData | undefined>>;
 }
 
 function SignInPage(props: SignInProps): JSX.Element {
@@ -11,13 +11,24 @@ function SignInPage(props: SignInProps): JSX.Element {
     "allithatgalli"
   );
   function handleSignIn() {
-    if (selectedUser !== "Select user...") {
-      props.setSignedInUser(selectedUser);
+    if (selectedUser !== "Select user..." && selectedUser !== undefined) {
+      props.setSignedInUser(getUserFromUsername(selectedUser, props.userData));
     } else {
       alert("You haven't selected a user...");
     }
     console.log("signed in as: ", selectedUser);
   }
+
+  function getUserFromUsername(
+    username: string,
+    userDataArr: IUserData[]
+  ): IUserData {
+    const filteredArr = userDataArr.filter(
+      (user) => user.username === username
+    );
+    return filteredArr[0];
+  }
+
   return (
     <>
       <div>
@@ -31,7 +42,10 @@ function SignInPage(props: SignInProps): JSX.Element {
             );
           })}
         </select>
-        <button className="sign-in-btn" onClick={handleSignIn}> SIGN IN </button>
+        <button className="sign-in-btn" onClick={handleSignIn}>
+          {" "}
+          SIGN IN{" "}
+        </button>
       </div>
     </>
   );

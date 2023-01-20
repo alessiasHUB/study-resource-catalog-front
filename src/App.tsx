@@ -13,7 +13,7 @@ import "./App.css";
 
 function App() {
   const [users, setUsers] = useState<IUserData[]>([]);
-  const [signedInUser, setSignedInUser] = useState<string | undefined>();
+  const [signedInUser, setSignedInUser] = useState<IUserData | undefined>();
 
   const fetchAndStoreUsers = useCallback(async () => {
     const response = await axios.get(`${url}/users`);
@@ -25,13 +25,15 @@ function App() {
   useEffect(() => {
     fetchAndStoreUsers();
   }, [fetchAndStoreUsers]);
+
+  console.log("signedIn user", signedInUser);
   return (
     <div className="App">
-      <NavBar signedInUser={signedInUser} />
+      <NavBar signedInUser={signedInUser?.username} />
       <Routes>
         <Route path="/" element={<HomePage />} />
 
-        <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/catalog" element={<CatalogPage signedInUser={signedInUser}/>} />
 
         <Route
           path="/signIn"
