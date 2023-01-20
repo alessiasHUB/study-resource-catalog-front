@@ -16,15 +16,24 @@ function Resource({ resourceData }: ResourceProps): JSX.Element {
     setIsFullView((prev) => !prev);
   };
 
+function evaluateUsage (resourceUsage: string) {
+  switch(resourceUsage) {
+    case "rec used":
+      return "🌟"
+      case "no rec used":
+        return "💩"
+    case "not used promise":
+      return "🔍"
+  }
+}
+
+
   return (
     <div className="ctn-resource">
       <p className="resource-title">{resourceData.title}</p>
       <p className="resource-post-date">{String(resourceData.post_date)}</p>
 
-      {/* use state to render? */}
-      {resourceData.usage === "rec used" && <p>🌟</p>}
-      {resourceData.usage === "no rec used" && <p>💩</p>}
-      {resourceData.usage === "not used promise" && <p>🔍</p>}
+<p>{evaluateUsage(resourceData.usage)}</p>
 
       <p className="resource-type">{resourceData.type}</p>
 
@@ -34,7 +43,7 @@ function Resource({ resourceData }: ResourceProps): JSX.Element {
           <p className="resource-description">{resourceData.description}</p>
           {resourceData.tags.map((tag) => {
             return (
-              <div className="resource-tag" key={resourceData.id}>
+              <div className="resource-tag" key={tag}>
                 {tag}
               </div>
             );
@@ -50,7 +59,7 @@ function Resource({ resourceData }: ResourceProps): JSX.Element {
             .filter((el, index) => index < 3)
             .map((tag) => {
               return (
-                <div className="resource-tag" key={resourceData.id}>
+                <div className="resource-tag" key={tag}>
                   {tag}
                 </div>
               );

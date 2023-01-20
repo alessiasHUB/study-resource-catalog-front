@@ -13,20 +13,23 @@ function CatalogPage(): JSX.Element {
   const fetchAndStoreResources = useCallback(async () => {
     const response = await axios.get(`${url}/resources`);
     const resourceData: IResourceData[] = response.data;
-    console.log("i am resource data", resourceData);
     setResources(resourceData);
   }, []);
 
-  console.log("i am resource a piece of state outside useEffect", resources);
   useEffect(() => {
     fetchAndStoreResources();
   }, [fetchAndStoreResources]);
 
   return (
     <>
+    <div className="ctn-resource-usage-key">
+      <p> Used and recommended = 🌟</p>
+      <p> Not used but recommended = 🔎</p>
+      <p>Not recommended = 💩</p>
+    </div>
       {resources.length > 0 &&
         resources.map((resource) => {
-          return <Resource resourceData={resource} />;
+          return <Resource resourceData={resource} key={resource.id}/>;
         })}
     </>
   );
