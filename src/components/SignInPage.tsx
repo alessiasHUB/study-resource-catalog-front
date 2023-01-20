@@ -31,7 +31,7 @@ function SignInPage(props: SignInProps): JSX.Element {
             );
           })}
         </select>
-        <button onClick={handleSignIn}> SIGN IN </button>
+        <button className="sign-in-btn" onClick={handleSignIn}> SIGN IN </button>
       </div>
     </>
   );

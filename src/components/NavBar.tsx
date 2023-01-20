@@ -10,7 +10,7 @@ function NavBar(props: NavBarProps): JSX.Element {
           <Link to="/"> HOME </Link>
           <Link to="/catalog"> CATALOG </Link>
           <Link to="/study_list"> STUDY LIST </Link>
-          <p>{props.signedInUser}</p>
+          <p className="signed-in-user">{props.signedInUser}</p>
         </>
       ) : (
         <>
