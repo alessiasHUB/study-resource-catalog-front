@@ -3,6 +3,7 @@ import axios from "axios";
 import { url } from "../utils/url";
 import { IResourceData } from "../utils/interfaces";
 import Resource from "./Resource";
+import { Link } from "react-router-dom";
 //get all resources
 //useState and interface for resources
 //map over all resources
@@ -23,13 +24,13 @@ function CatalogPage(): JSX.Element {
   }, [fetchAndStoreResources]);
 
   return (
-  <> 
-  {resources.length > 0 && resources.map(resource => {
-    return (
-      <Resource resourceData={resource}/>
-    )
-  })}
-  </>
+    <>
+      <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>
+      {resources.length > 0 &&
+        resources.map((resource) => {
+          return <Resource resourceData={resource} />;
+        })}
+    </>
   );
 }
 

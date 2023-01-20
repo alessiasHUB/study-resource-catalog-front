@@ -10,6 +10,7 @@ import { IUserData } from "./utils/interfaces";
 import { useCallback, useEffect, useState } from "react";
 import { url } from "./utils/url";
 import "./App.css";
+import AddResourcePage from "./components/AddResourcePage";
 
 function App() {
   const [users, setUsers] = useState<IUserData[]>([]);
@@ -40,6 +41,7 @@ function App() {
           }
         />
         <Route path="/study_list" element={<StudyListPage />} />
+        <Route path="/add_resource" element={<AddResourcePage />} />
       </Routes>
     </div>
   );
