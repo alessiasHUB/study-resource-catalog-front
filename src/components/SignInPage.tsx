@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IUserData } from "../utils/interfaces";
 
 interface SignInProps {
-  IUserData: IUserData[];
+  userData: IUserData[];
   setSignedInUser: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
@@ -23,10 +23,10 @@ function SignInPage(props: SignInProps): JSX.Element {
       <div>
         <> Sign-In Page </>
         <select onChange={(e) => setSelectedUser(e.target.value)}>
-          {props.IUserData.map((IUserData) => {
+          {props.userData.map((userData) => {
             return (
-              <option key={IUserData.id} value={IUserData.username}>
-                {IUserData.username}
+              <option key={userData.id} value={userData.username}>
+                {userData.username}
               </option>
             );
           })}

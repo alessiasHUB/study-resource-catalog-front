@@ -1,19 +1,19 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import CatalogPage from "./components/CatalogPage";
-import { Route, Routes } from "react-router-dom";
 import SignInPage from "./components/SignInPage";
+import NavBar from "./components/NavBar";
+import StudyListPage from "./components/StudyListPage";
 import axios from "axios";
 import { IUserData } from "./utils/interfaces";
 import { useCallback, useEffect, useState } from "react";
 import { url } from "./utils/url";
 import "./App.css";
-import NavBar from "./components/NavBar";
 
 function App() {
   const [users, setUsers] = useState<IUserData[]>([]);
   const [signedInUser, setSignedInUser] = useState<string | undefined>();
-  //signedinuser to be used in top corner of navbar after it has been assigned ---> may need to pass this state from App down to SigninPage instead***
 
   const fetchAndStoreUsers = useCallback(async () => {
     const response = await axios.get(`${url}/users`);
@@ -36,9 +36,10 @@ function App() {
         <Route
           path="/signIn"
           element={
-            <SignInPage IUserData={users} setSignedInUser={setSignedInUser} />
+            <SignInPage userData={users} setSignedInUser={setSignedInUser} />
           }
         />
+        <Route path="/study_list" element={<StudyListPage />} />
       </Routes>
     </div>
   );
