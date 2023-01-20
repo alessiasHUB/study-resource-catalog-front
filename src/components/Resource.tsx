@@ -1,13 +1,11 @@
+import axios from "axios";
 import { useState } from "react";
 import { IResourceData } from "../utils/interfaces";
+import { url } from "../utils/url";
 
 interface ResourceProps {
   resourceData: IResourceData;
 }
-
-//TODO: add conditional rendering to a button "FULL VIEW"
-//      if !FULL_VIEW =>  the current map (add comment and fullview btn)
-//      if  FULL_VIEW =>  all tingzz
 
 function Resource({ resourceData }: ResourceProps): JSX.Element {
   const [isFullView, setIsFullView] = useState<boolean>(false);
@@ -16,6 +14,7 @@ function Resource({ resourceData }: ResourceProps): JSX.Element {
     setIsFullView((prev) => !prev);
   };
 
+  //-----------------------------------put this function into utils
 function evaluateUsage (resourceUsage: string) {
   switch(resourceUsage) {
     case "rec used":
@@ -26,6 +25,11 @@ function evaluateUsage (resourceUsage: string) {
       return "🔍"
   }
 }
+
+// async function handleLikeClick () {
+//   const response = axios.post(url + "/likes/" + resourceData.id + "/" + )
+// }
+
 
 
   return (
