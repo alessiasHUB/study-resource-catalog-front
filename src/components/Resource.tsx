@@ -3,21 +3,25 @@ import { useState } from "react";
 import { IResourceData, IUserData, ICommentData } from "../utils/interfaces";
 import { url } from "../utils/url";
 import "./resource.css";
+import Comment from "./Comment";
 
 interface ResourceProps {
   resourceData: IResourceData;
   signedInUser: IUserData | undefined;
   fetchAndStoreResources: () => Promise<void>;
+  allUsers: IUserData[];
 }
 
 function Resource({
   resourceData,
   signedInUser,
   fetchAndStoreResources,
+  allUsers,
 }: ResourceProps): JSX.Element {
   const [isFullView, setIsFullView] = useState<boolean>(false);
   const [comments, setComments] = useState<ICommentData[]>();
   const [newComment, setNewComment] = useState<string>("");
+  const [isHovered, setIsHovered] = useState(false);
 
   //-----------------------------------get comments
   const handleTopLvCommentBtn = (id: number) => {
@@ -38,7 +42,6 @@ function Resource({
   const postNewComment = async (commentTxt: string) => {
     try {
       if (signedInUser) {
-        console.log(newComment, resourceData.id, signedInUser.id);
         await axios.post(
           url + `/comments/${signedInUser.id}/${resourceData.id}`,
           {
@@ -48,6 +51,19 @@ function Resource({
       }
     } catch (error) {
       console.error("Woops... issue with POST request: ", error);
+    }
+  };
+
+  //-----------------------------------add to study-list
+  const postToStudyList = async () => {
+    try {
+      if (signedInUser) {
+        await axios.post(
+          url + `/study_list/${resourceData.id}/${signedInUser.id}`
+        );
+      }
+    } catch (error) {
+      console.error("Woops... issue with POST to study_list request: ", error);
     }
   };
 
@@ -89,7 +105,21 @@ function Resource({
     <div className="ctn-resource">
       <p className="resource-title">{resourceData.title}</p>
       <p className="resource-post-date">{String(resourceData.post_date)}</p>
-      <p>{evaluateUsage(resourceData.usage)}</p>
+      <p
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {evaluateUsage(resourceData.usage)}
+      </p>
+      <div>
+        {isHovered && (
+          <div className="ctn-resource-usage-key">
+            <p> Used and recommended = 🌟</p>
+            <p> Not used but recommended = 🔎</p>
+            <p>Not recommended = 💩</p>
+          </div>
+        )}
+      </div>
       <p className="resource-type">{resourceData.type}</p>
       {/* -------------------------------if isFullView is true - render full description and all tags */}
       {isFullView ? (
@@ -158,13 +188,15 @@ function Resource({
             <h3>Comments</h3>
             <ul>
               {comments.map((el) => (
-                <li key={el.id}>{el.text}</li>
+                <Comment allUsers={allUsers} comment={el} />
               ))}
             </ul>
           </div>
         </>
       )}
-      <hr />
+      {signedInUser && (
+        <button onClick={postToStudyList}>➕ Add to study-list</button>
+      )}
     </div>
   );
 }

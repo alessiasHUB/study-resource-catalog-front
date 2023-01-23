@@ -10,9 +10,13 @@ import { Link } from "react-router-dom";
 
 interface CatalogPageProps {
   signedInUser: IUserData | undefined;
+  allUsers: IUserData[];
 }
 
-function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
+function CatalogPage({
+  signedInUser,
+  allUsers,
+}: CatalogPageProps): JSX.Element {
   const [resources, setResources] = useState<IResourceData[]>([]);
 
   const fetchAndStoreResources = useCallback(async () => {
@@ -28,11 +32,6 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
   return (
     <>
       {signedInUser && <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>}
-      <div className="ctn-resource-usage-key">
-        <p> Used and recommended = 🌟</p>
-        <p> Not used but recommended = 🔎</p>
-        <p>Not recommended = 💩</p>
-      </div>
       {resources.length > 0 &&
         resources.map((resource) => {
           return (
@@ -41,6 +40,7 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
               signedInUser={signedInUser}
               fetchAndStoreResources={fetchAndStoreResources}
               key={resource.id}
+              allUsers={allUsers}
             />
           );
         })}
