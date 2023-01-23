@@ -30,14 +30,14 @@ function Resource({ resourceData, signedInUser, fetchAndStoreResources }: Resour
 
   async function handleLikeClick() {
     if (signedInUser !== undefined) {
-      await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}/true`)
+      await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}`, {liked: true})
     }
   fetchAndStoreResources()
   }
 
   async function handleDislikeClick() {
     if (signedInUser !== undefined) {
-      await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}/false`)
+      await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}`, {liked: false})
     }
     fetchAndStoreResources()
   }
