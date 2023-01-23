@@ -1,7 +1,6 @@
 import { typesArr } from "../utils/types";
 import { usageArr } from "../utils/usage";
 import { tagsArr } from "../utils/tags";
-import { useState } from "react";
 
 export default function AddResourcePage(): JSX.Element {
   //const [tags, setTags] = useState<string[]>([]);  ------------------------replaced by dropdown

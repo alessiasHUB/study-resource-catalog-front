@@ -27,12 +27,7 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
 
   return (
     <>
-
       <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>
-      {resources.length > 0 &&
-        resources.map((resource) => {
-          return <Resource resourceData={resource} />;
-
       <div className="ctn-resource-usage-key">
         <p> Used and recommended = 🌟</p>
         <p> Not used but recommended = 🔎</p>
@@ -48,7 +43,6 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
               key={resource.id}
             />
           );
-
         })}
     </>
   );
