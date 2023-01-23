@@ -2,14 +2,19 @@ import axios from "axios";
 import { useState } from "react";
 import { IResourceData, IUserData } from "../utils/interfaces";
 import { url } from "../utils/url";
+import "./resource.css";
 
 interface ResourceProps {
   resourceData: IResourceData;
-  signedInUser: IUserData | undefined
-  fetchAndStoreResources: () => Promise<void>
+  signedInUser: IUserData | undefined;
+  fetchAndStoreResources: () => Promise<void>;
 }
 
-function Resource({ resourceData, signedInUser, fetchAndStoreResources }: ResourceProps): JSX.Element {
+function Resource({
+  resourceData,
+  signedInUser,
+  fetchAndStoreResources,
+}: ResourceProps): JSX.Element {
   const [isFullView, setIsFullView] = useState<boolean>(false);
 
   const handleFullViewClicked = () => {
@@ -30,16 +35,20 @@ function Resource({ resourceData, signedInUser, fetchAndStoreResources }: Resour
 
   async function handleLikeClick() {
     if (signedInUser !== undefined) {
-      await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}`, {liked: true})
+      await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}`, {
+        liked: true,
+      });
     }
-  fetchAndStoreResources()
+    fetchAndStoreResources();
   }
 
   async function handleDislikeClick() {
     if (signedInUser !== undefined) {
-      await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}`, {liked: false})
+      await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}`, {
+        liked: false,
+      });
     }
-    fetchAndStoreResources()
+    fetchAndStoreResources();
   }
 
   return (
@@ -84,12 +93,16 @@ function Resource({ resourceData, signedInUser, fetchAndStoreResources }: Resour
       <div className="resource-link-btn">
         <a href={resourceData.link}>Check it out</a>
       </div>
-      {signedInUser !== undefined &&
+      {signedInUser !== undefined && (
         <div>
-          <button className="like-resource-btn" onClick={handleLikeClick}>👍|{resourceData.likes}</button>
-          <button className="dislike-resource-btn" onClick={handleDislikeClick}>👎|{resourceData.dislikes}</button>
+          <button className="like-resource-btn" onClick={handleLikeClick}>
+            👍|{resourceData.likes}
+          </button>
+          <button className="dislike-resource-btn" onClick={handleDislikeClick}>
+            👎|{resourceData.dislikes}
+          </button>
         </div>
-      }
+      )}
 
       <button className="full-view-btn" onClick={handleFullViewClicked}>
         Full View
