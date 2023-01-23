@@ -17,6 +17,14 @@ interface IResourceData {
   usage: string;
   user_id: number;
 }
+interface INewResourceData {
+  description: string;
+  link: string;
+  tags: string[];
+  title: string;
+  type: string;
+  usage: string;
+}
 
 interface ICommentData {
   id: number;
@@ -46,4 +54,5 @@ export type {
   ICommentData,
   ILikesData,
   IStudyListData,
+  INewResourceData,
 };

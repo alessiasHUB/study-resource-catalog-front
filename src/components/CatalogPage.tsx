@@ -4,7 +4,7 @@ import { url } from "../utils/url";
 import { IResourceData, IUserData } from "../utils/interfaces";
 import Resource from "./Resource";
 import { Link } from "react-router-dom";
-import "./CatalogPage.css"
+import "./CatalogPage.css";
 //get all resources
 //useState and interface for resources
 //map over all resources
@@ -28,7 +28,11 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
 
   return (
     <>
-    {signedInUser && <Link to="/add_resource" className="add-resource-btn">Add new resource</Link>}
+      {signedInUser && (
+        <Link to="/add_resource" className="add-resource-btn">
+          Add new resource
+        </Link>
+      )}
       <div className="ctn-resource-usage-key">
         <p> Used and recommended = 🌟</p>
         <p> Not used but recommended = 🔎</p>
