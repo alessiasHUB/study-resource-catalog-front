@@ -27,7 +27,7 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
 
   return (
     <>
-      <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>
+      {signedInUser && <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>}
       <div className="ctn-resource-usage-key">
         <p> Used and recommended = 🌟</p>
         <p> Not used but recommended = 🔎</p>
