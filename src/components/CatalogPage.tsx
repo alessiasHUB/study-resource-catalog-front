@@ -8,10 +8,10 @@ import Resource from "./Resource";
 //map over all resources
 
 interface CatalogPageProps {
-  signedInUser: IUserData | undefined
+  signedInUser: IUserData | undefined;
 }
 
-function CatalogPage({signedInUser}: CatalogPageProps): JSX.Element {
+function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
   const [resources, setResources] = useState<IResourceData[]>([]);
 
   const fetchAndStoreResources = useCallback(async () => {
@@ -33,11 +33,14 @@ function CatalogPage({signedInUser}: CatalogPageProps): JSX.Element {
       </div>
       {resources.length > 0 &&
         resources.map((resource) => {
-          return <Resource 
-          resourceData={resource} 
-          signedInUser={signedInUser} 
-          fetchAndStoreResources={fetchAndStoreResources}
-          key={resource.id} />;
+          return (
+            <Resource
+              resourceData={resource}
+              signedInUser={signedInUser}
+              fetchAndStoreResources={fetchAndStoreResources}
+              key={resource.id}
+            />
+          );
         })}
     </>
   );
