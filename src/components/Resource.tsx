@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { IResourceData, IUserData } from "../utils/interfaces";
+import { IResourceData, IUserData, ICommentData } from "../utils/interfaces";
 import { url } from "../utils/url";
 import "./resource.css";
 
@@ -16,6 +16,18 @@ function Resource({
   fetchAndStoreResources,
 }: ResourceProps): JSX.Element {
   const [isFullView, setIsFullView] = useState<boolean>(false);
+  const [comments, setComments] = useState<ICommentData[]>();
+
+  //-----------------------------------get comments
+  const handleTopLvCommentBtn = (id: number) => {
+    getResourceComments(id);
+  };
+  const getResourceComments = async (id: number) => {
+    const response = await axios.get(`${url}/comments/${id}`);
+    let resourceComments: ICommentData[] = response.data;
+    console.log(resourceComments);
+    setComments(resourceComments);
+  };
 
   const handleFullViewClicked = () => {
     setIsFullView((prev) => !prev);
@@ -107,6 +119,16 @@ function Resource({
       <button className="full-view-btn" onClick={handleFullViewClicked}>
         Full View
       </button>
+      <button onClick={() => handleTopLvCommentBtn(resourceData.id)}>
+        👀 Comments
+      </button>
+      {comments && (
+        <div>
+          {comments.map((el) => (
+            <p>{el.text}</p>
+          ))}
+        </div>
+      )}
       <hr />
     </div>
   );
