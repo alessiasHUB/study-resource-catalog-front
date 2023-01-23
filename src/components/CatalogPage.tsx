@@ -1,34 +1,54 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { url } from "../utils/url";
-import { IResourceData } from "../utils/interfaces";
+import { IResourceData, IUserData } from "../utils/interfaces";
 import Resource from "./Resource";
 import { Link } from "react-router-dom";
 //get all resources
 //useState and interface for resources
 //map over all resources
 
-function CatalogPage(): JSX.Element {
+interface CatalogPageProps {
+  signedInUser: IUserData | undefined;
+}
+
+function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
   const [resources, setResources] = useState<IResourceData[]>([]);
 
   const fetchAndStoreResources = useCallback(async () => {
     const response = await axios.get(`${url}/resources`);
     const resourceData: IResourceData[] = response.data;
-    console.log("i am resource data", resourceData);
     setResources(resourceData);
   }, []);
 
-  console.log("i am resource a piece of state outside useEffect", resources);
   useEffect(() => {
     fetchAndStoreResources();
   }, [fetchAndStoreResources]);
 
   return (
     <>
+<<<<<<< HEAD
       <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>
       {resources.length > 0 &&
         resources.map((resource) => {
           return <Resource resourceData={resource} />;
+=======
+      <div className="ctn-resource-usage-key">
+        <p> Used and recommended = 🌟</p>
+        <p> Not used but recommended = 🔎</p>
+        <p>Not recommended = 💩</p>
+      </div>
+      {resources.length > 0 &&
+        resources.map((resource) => {
+          return (
+            <Resource
+              resourceData={resource}
+              signedInUser={signedInUser}
+              fetchAndStoreResources={fetchAndStoreResources}
+              key={resource.id}
+            />
+          );
+>>>>>>> 325eb47dae12ebaee941eb29f4a4a0bf31008bec
         })}
     </>
   );
