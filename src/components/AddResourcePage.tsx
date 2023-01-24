@@ -1,7 +1,6 @@
 import { typesArr } from "../utils/types";
 import { usageArr } from "../utils/usage";
 import { tagsArr } from "../utils/tags";
-import { useState } from "react";
 import { url } from "../utils/url";
 import { IUserData, INewResourceData } from "../utils/interfaces";
 import axios from "axios";
