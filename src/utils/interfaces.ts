@@ -48,6 +48,23 @@ interface IStudyListData {
   post_date: Date;
 }
 
+interface ITypes {
+  video: boolean;
+  article: boolean;
+  eBook: boolean;
+  podcast: boolean;
+  exercise: boolean;
+  exercise_set: boolean;
+  software_tool: boolean;
+  course: boolean;
+  diagram: boolean;
+  cheat_sheet: boolean;
+  reference: boolean;
+  resource_list: boolean;
+  youtube_channel: boolean;
+  organisation: boolean;
+}
+
 export type {
   IUserData,
   IResourceData,
@@ -55,4 +72,5 @@ export type {
   ILikesData,
   IStudyListData,
   INewResourceData,
+  ITypes,
 };
