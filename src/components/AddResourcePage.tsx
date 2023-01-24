@@ -13,7 +13,6 @@ interface AddResourcePageProps {
 export default function AddResourcePage({
   signedInUser,
 }: AddResourcePageProps): JSX.Element {
-
   //const [tags, setTags] = useState<string[]>([]);  ------------------------replaced by dropdown
 
   const handleSubmitResource = (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,7 +50,6 @@ export default function AddResourcePage({
       newResourceData: newFormData,
     });
     console.log(response);
-
   };
   // const handleAddTag= (el: string) => {
   //  setTags([el, ...tags])

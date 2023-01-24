@@ -30,7 +30,6 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
 
   return (
     <>
-
       {signedInUser && (
         <Link to="/add_resource" className="add-resource-btn">
           Add new resource

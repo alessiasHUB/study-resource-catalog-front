@@ -51,7 +51,6 @@ function App() {
           path="/add_resource"
           element={<AddResourcePage signedInUser={signedInUser} />}
         />
-
       </Routes>
     </div>
   );
