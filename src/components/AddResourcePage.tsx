@@ -1,6 +1,7 @@
 import { typesArr } from "../utils/types";
 import { usageArr } from "../utils/usage";
 import { tagsArr } from "../utils/tags";
+
 import { url } from "../utils/url";
 import { IUserData, INewResourceData } from "../utils/interfaces";
 import axios from "axios";
@@ -12,6 +13,7 @@ interface AddResourcePageProps {
 export default function AddResourcePage({
   signedInUser,
 }: AddResourcePageProps): JSX.Element {
+
   //const [tags, setTags] = useState<string[]>([]);  ------------------------replaced by dropdown
 
   const handleSubmitResource = (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,6 +38,7 @@ export default function AddResourcePage({
       description: description.value,
       type: type.value,
       usage: usage.value,
+
       tags: [tags.value],
     };
     console.log(resourceForm);
@@ -48,6 +51,7 @@ export default function AddResourcePage({
       newResourceData: newFormData,
     });
     console.log(response);
+
   };
   // const handleAddTag= (el: string) => {
   //  setTags([el, ...tags])
