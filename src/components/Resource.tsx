@@ -1,15 +1,22 @@
 import axios from "axios";
 import { useState } from "react";
-import { IResourceData, IUserData, ICommentData } from "../utils/interfaces";
+import {
+  IResourceData,
+  IUserData,
+  ICommentData,
+  IStudyListData,
+} from "../utils/interfaces";
 import { url } from "../utils/url";
 import "./resource.css";
 import Comment from "./Comment";
+import checkForResourceInStudyList from "../utils/is-res-in-study-list";
 
 interface ResourceProps {
   resourceData: IResourceData;
   signedInUser: IUserData | undefined;
   fetchAndStoreResources: () => Promise<void>;
   allUsers: IUserData[];
+  studyListArr: IStudyListData[];
 }
 
 function Resource({
@@ -17,6 +24,7 @@ function Resource({
   signedInUser,
   fetchAndStoreResources,
   allUsers,
+  studyListArr,
 }: ResourceProps): JSX.Element {
   const [isFullView, setIsFullView] = useState<boolean>(false);
   const [comments, setComments] = useState<ICommentData[]>();
@@ -164,7 +172,6 @@ function Resource({
           </button>
         </div>
       )}
-
       <button className="full-view-btn" onClick={handleFullViewClicked}>
         Full View
       </button>
@@ -194,9 +201,14 @@ function Resource({
           </div>
         </>
       )}
-      {signedInUser && (
-        <button onClick={postToStudyList}>➕ Add to study-list</button>
-      )}
+      {signedInUser &&
+        !checkForResourceInStudyList(resourceData.id, studyListArr) && (
+          <button onClick={postToStudyList}>➕ Add to study-list</button>
+        )}{" "}
+      {signedInUser &&
+        checkForResourceInStudyList(resourceData.id, studyListArr) && (
+          <p>(This resource is in your study-list)</p>
+        )}
     </div>
   );
 }

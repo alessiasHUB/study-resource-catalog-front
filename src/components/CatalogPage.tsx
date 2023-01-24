@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { url } from "../utils/url";
-import { IResourceData, IUserData } from "../utils/interfaces";
+import { IResourceData, IStudyListData, IUserData } from "../utils/interfaces";
 import Resource from "./Resource";
 import { Link } from "react-router-dom";
 //get all resources
@@ -11,11 +11,13 @@ import { Link } from "react-router-dom";
 interface CatalogPageProps {
   signedInUser: IUserData | undefined;
   allUsers: IUserData[];
+  studyListArr: IStudyListData[];
 }
 
 function CatalogPage({
   signedInUser,
   allUsers,
+  studyListArr,
 }: CatalogPageProps): JSX.Element {
   const [resources, setResources] = useState<IResourceData[]>([]);
 
@@ -41,6 +43,7 @@ function CatalogPage({
               fetchAndStoreResources={fetchAndStoreResources}
               key={resource.id}
               allUsers={allUsers}
+              studyListArr={studyListArr}
             />
           );
         })}

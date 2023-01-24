@@ -1,6 +1,6 @@
 import { IUserData } from "./interfaces";
 
-export default function findUsernameFromID(
+function findUsernameFromID(
   id: number,
   userArr: IUserData[]
 ): string | undefined {
@@ -10,3 +10,5 @@ export default function findUsernameFromID(
     }
   }
 }
+
+export default findUsernameFromID;
