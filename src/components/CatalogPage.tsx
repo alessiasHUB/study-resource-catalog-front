@@ -4,6 +4,8 @@ import { url } from "../utils/url";
 import { IResourceData, IUserData } from "../utils/interfaces";
 import Resource from "./Resource";
 import { Link } from "react-router-dom";
+import {tagsArr} from "../utils/tags"
+import {typesArr} from "../utils/types"
 
 import "./CatalogPage.css";
 import { filterResources } from "../utils/filterResources";
@@ -15,6 +17,8 @@ interface CatalogPageProps {
 function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
   const [resources, setResources] = useState<IResourceData[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
+
+  const [currentTypes, setCurrentTypes] = useState("")
 
   const fetchAndStoreResources = useCallback(async () => {
     const response = await axios.get(`${url}/resources`);
@@ -35,6 +39,22 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="search here..."
         ></input>
+
+        <div className="ctn-sort-by-type">
+
+      {typesArr.map(type => {
+return (<>
+        <input
+        type="checkbox"
+        id="checkbox"
+        value={type}
+        onChange={(e) => setCurrentTypes(e.target.value)}
+      />
+      <label htmlFor="checkbox">articles</label>
+      </>)
+      })}
+
+        </div>
       </div>
 
       <div className="ctn-catalog-page-right">
