@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { IResourceData, IUserData, ICommentData } from "../utils/interfaces";
 import { url } from "../utils/url";
-import "./resource.css";
+import "./CatalogPage.css";
 
 interface ResourceProps {
   resourceData: IResourceData;
