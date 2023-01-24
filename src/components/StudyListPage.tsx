@@ -9,7 +9,9 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
   const { signedInUser, studyListArr } = props;
   return (
     <>
-      <p>Study List Page</p>
+      {studyListArr.map((el) => <p>{el.resource_id}</p>)}
     </>
   );
 }
+
+//GET req for the joined study-list table here

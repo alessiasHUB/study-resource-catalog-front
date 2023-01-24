@@ -75,6 +75,18 @@ function Resource({
     }
   };
 
+  const deleteFromStudyList = async () => {
+    try {
+      if (signedInUser) {
+        await axios.delete(
+          url + `/study_list/${resourceData.id}/${signedInUser.id}`
+        );
+      }
+    } catch (error) {
+      console.error("Woops... issue with DELETE to study_list request: ", error);
+    }
+  }
+
   const handleFullViewClicked = () => {
     setIsFullView((prev) => !prev);
   };
@@ -207,7 +219,7 @@ function Resource({
         )}{" "}
       {signedInUser &&
         checkForResourceInStudyList(resourceData.id, studyListArr) && (
-          <p>(This resource is in your study-list)</p>
+          <button onClick={deleteFromStudyList}>Remove from study-list</button>
         )}
     </div>
   );
