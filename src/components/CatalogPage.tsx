@@ -1,11 +1,11 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { url } from "../utils/url";
-import { IResourceData, IUserData } from "../utils/interfaces";
+import { IResourceData, ITypes, IUserData } from "../utils/interfaces";
 import Resource from "./Resource";
 import { Link } from "react-router-dom";
-import {tagsArr} from "../utils/tags"
-import {typesArr} from "../utils/types"
+import { tagsArr } from "../utils/tags";
+import { ResourceType, typesArr } from "../utils/types";
 
 import "./CatalogPage.css";
 import { filterResources } from "../utils/filterResources";
@@ -18,7 +18,22 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
   const [resources, setResources] = useState<IResourceData[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
 
-  const [currentTypes, setCurrentTypes] = useState("")
+  const [selectedTypes, setSelectedTypes] = useState<ITypes>({
+    video: false,
+    article: false,
+    eBook: false,
+    podcast: false,
+    exercise: false,
+    exercise_set: false,
+    software_tool: false,
+    course: false,
+    diagram: false,
+    cheat_sheet: false,
+    reference: false,
+    resource_list: false,
+    youtube_channel: false,
+    organisation: false,
+  });
 
   const fetchAndStoreResources = useCallback(async () => {
     const response = await axios.get(`${url}/resources`);
@@ -29,6 +44,12 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
   useEffect(() => {
     fetchAndStoreResources();
   }, [fetchAndStoreResources]);
+
+  const handleCheckedBox = (type: ResourceType) => {
+    setSelectedTypes((prev) => {
+      return { ...prev, [type]: !prev[type] };
+    });
+  };
 
   return (
     <>
@@ -41,19 +62,19 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
         ></input>
 
         <div className="ctn-sort-by-type">
-
-      {typesArr.map(type => {
-return (<>
-        <input
-        type="checkbox"
-        id="checkbox"
-        value={type}
-        onChange={(e) => setCurrentTypes(e.target.value)}
-      />
-      <label htmlFor="checkbox">articles</label>
-      </>)
-      })}
-
+          {typesArr.map((type) => {
+            return (
+              <div key={type}>
+                <input
+                  type="checkbox"
+                  id="checkbox"
+                  value={type}
+                  onChange={() => handleCheckedBox(type)}
+                />
+                <label htmlFor="checkbox">{type}</label>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -70,16 +91,18 @@ return (<>
           <p>Not recommended = 💩</p>
         </div>
         {resources.length > 0 &&
-          filterResources(searchInput, resources).map((resource) => {
-            return (
-              <Resource
-                resourceData={resource}
-                signedInUser={signedInUser}
-                fetchAndStoreResources={fetchAndStoreResources}
-                key={resource.id}
-              />
-            );
-          })}
+          filterResources(searchInput, selectedTypes, resources).map(
+            (resource) => {
+              return (
+                <Resource
+                  resourceData={resource}
+                  signedInUser={signedInUser}
+                  fetchAndStoreResources={fetchAndStoreResources}
+                  key={resource.id}
+                />
+              );
+            }
+          )}
       </div>
     </>
   );
