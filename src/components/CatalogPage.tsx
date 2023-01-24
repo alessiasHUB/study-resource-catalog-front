@@ -6,10 +6,8 @@ import Resource from "./Resource";
 import { Link } from "react-router-dom";
 
 import "./CatalogPage.css";
+import { filterResources } from "../utils/filterResources";
 
-//get all resources
-//useState and interface for resources
-//map over all resources
 
 interface CatalogPageProps {
   signedInUser: IUserData | undefined;
@@ -17,6 +15,7 @@ interface CatalogPageProps {
 
 function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
   const [resources, setResources] = useState<IResourceData[]>([]);
+  const [searchInput, setSearchInput] = useState<string>("")
 
   const fetchAndStoreResources = useCallback(async () => {
     const response = await axios.get(`${url}/resources`);
@@ -30,6 +29,11 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
 
   return (
     <>
+    <div className="ctn-catalog-page-left">
+      <input className="catalog-search-input" value={searchInput} onChange={(e)=>setSearchInput(e.target.value)}  placeholder="search here..."></input>
+    </div>
+
+    <div className="ctn-catalog-page-right">
       {signedInUser && (
         <Link to="/add_resource" className="add-resource-btn">
           Add new resource
@@ -42,7 +46,7 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
         <p>Not recommended = 💩</p>
       </div>
       {resources.length > 0 &&
-        resources.map((resource) => {
+        filterResources(searchInput,resources).map((resource) => {
           return (
             <Resource
               resourceData={resource}
@@ -52,6 +56,7 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
             />
           );
         })}
+      </div>
     </>
   );
 }
