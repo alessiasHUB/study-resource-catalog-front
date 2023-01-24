@@ -74,7 +74,8 @@ function App() {
             }
           />
         )}
-        <Route path="/add_resource" element={<AddResourcePage />} />
+        <Route path="/add_resource" element={<AddResourcePage signedInUser={signedInUser}/>} />
+
       </Routes>
     </div>
   );
