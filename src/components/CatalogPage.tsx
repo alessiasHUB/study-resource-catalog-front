@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { url } from "../utils/url";
-import { IResourceData, IUserData } from "../utils/interfaces";
+import { IResourceData, IStudyListData, IUserData } from "../utils/interfaces";
 import Resource from "./Resource";
 import { Link } from "react-router-dom";
 
@@ -10,9 +10,15 @@ import { filterResources } from "../utils/filterResources";
 
 interface CatalogPageProps {
   signedInUser: IUserData | undefined;
+  allUsers: IUserData[];
+  studyListArr: IStudyListData[];
 }
 
-function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
+function CatalogPage({
+  signedInUser,
+  allUsers,
+  studyListArr,
+}: CatalogPageProps): JSX.Element {
   const [resources, setResources] = useState<IResourceData[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
 
@@ -28,6 +34,7 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
 
   return (
     <>
+
       <div className="ctn-catalog-page-left">
         <input
           className="catalog-search-input"
@@ -49,6 +56,7 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
           <p> Not used but recommended = 🔎</p>
           <p>Not recommended = 💩</p>
         </div>
+        {signedInUser && <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>}
         {resources.length > 0 &&
           filterResources(searchInput, resources).map((resource) => {
             return (
@@ -57,6 +65,8 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
                 signedInUser={signedInUser}
                 fetchAndStoreResources={fetchAndStoreResources}
                 key={resource.id}
+                allUsers={allUsers}
+              studyListArr={studyListArr}
               />
             );
           })}

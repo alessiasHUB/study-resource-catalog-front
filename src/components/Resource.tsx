@@ -1,22 +1,38 @@
 import axios from "axios";
 import { useState } from "react";
-import { IResourceData, IUserData, ICommentData } from "../utils/interfaces";
+import {
+  IResourceData,
+  IUserData,
+  ICommentData,
+  IStudyListData,
+} from "../utils/interfaces";
 import { url } from "../utils/url";
+
+import "./resource.css";
+import Comment from "./Comment";
+import checkForResourceInStudyList from "../utils/is-res-in-study-list";
 import "./CatalogPage.css";
+
 
 interface ResourceProps {
   resourceData: IResourceData;
   signedInUser: IUserData | undefined;
   fetchAndStoreResources: () => Promise<void>;
+  allUsers: IUserData[];
+  studyListArr: IStudyListData[];
 }
 
 function Resource({
   resourceData,
   signedInUser,
   fetchAndStoreResources,
+  allUsers,
+  studyListArr,
 }: ResourceProps): JSX.Element {
   const [isFullView, setIsFullView] = useState<boolean>(false);
   const [comments, setComments] = useState<ICommentData[]>();
+  const [newComment, setNewComment] = useState<string>("");
+  const [isHovered, setIsHovered] = useState(false);
 
   //-----------------------------------get comments
   const handleTopLvCommentBtn = (id: number) => {
@@ -28,6 +44,51 @@ function Resource({
     console.log(resourceComments);
     setComments(resourceComments);
   };
+
+  //-----------------------------------leave a new comment
+  const handleSubmitNewComment = (commentTxt: string) => {
+    postNewComment(commentTxt).then(() => getResourceComments(resourceData.id));
+    setNewComment("");
+  };
+  const postNewComment = async (commentTxt: string) => {
+    try {
+      if (signedInUser) {
+        await axios.post(
+          url + `/comments/${signedInUser.id}/${resourceData.id}`,
+          {
+            text: commentTxt,
+          }
+        );
+      }
+    } catch (error) {
+      console.error("Woops... issue with POST request: ", error);
+    }
+  };
+
+  //-----------------------------------add to study-list
+  const postToStudyList = async () => {
+    try {
+      if (signedInUser) {
+        await axios.post(
+          url + `/study_list/${resourceData.id}/${signedInUser.id}`
+        );
+      }
+    } catch (error) {
+      console.error("Woops... issue with POST to study_list request: ", error);
+    }
+  };
+
+  const deleteFromStudyList = async () => {
+    try {
+      if (signedInUser) {
+        await axios.delete(
+          url + `/study_list/${resourceData.id}/${signedInUser.id}`
+        );
+      }
+    } catch (error) {
+      console.error("Woops... issue with DELETE to study_list request: ", error);
+    }
+  }
 
   const handleFullViewClicked = () => {
     setIsFullView((prev) => !prev);
@@ -67,11 +128,22 @@ function Resource({
     <div className="ctn-resource">
       <p className="resource-title">{resourceData.title}</p>
       <p className="resource-post-date">{String(resourceData.post_date)}</p>
-
-      <p>{evaluateUsage(resourceData.usage)}</p>
-
+      <p
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {evaluateUsage(resourceData.usage)}
+      </p>
+      <div>
+        {isHovered && (
+          <div className="ctn-resource-usage-key">
+            <p> Used and recommended = 🌟</p>
+            <p> Not used but recommended = 🔎</p>
+            <p>Not recommended = 💩</p>
+          </div>
+        )}
+      </div>
       <p className="resource-type">{resourceData.type}</p>
-
       {/* -------------------------------if isFullView is true - render full description and all tags */}
       {isFullView ? (
         <>
@@ -115,7 +187,6 @@ function Resource({
           </button>
         </div>
       )}
-
       <button className="full-view-btn" onClick={handleFullViewClicked}>
         Full View
       </button>
@@ -123,13 +194,36 @@ function Resource({
         👀 Comments
       </button>
       {comments && (
-        <div>
-          {comments.map((el) => (
-            <p>{el.text}</p>
-          ))}
-        </div>
+        <>
+          {signedInUser && (
+            <div>
+              <input
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
+              <button onClick={() => handleSubmitNewComment(newComment)}>
+                Submit Comment
+              </button>
+            </div>
+          )}
+          <div>
+            <h3>Comments</h3>
+            <ul>
+              {comments.map((el) => (
+                <Comment allUsers={allUsers} comment={el} />
+              ))}
+            </ul>
+          </div>
+        </>
       )}
-      <hr />
+      {signedInUser &&
+        !checkForResourceInStudyList(resourceData.id, studyListArr) && (
+          <button onClick={postToStudyList}>➕ Add to study-list</button>
+        )}{" "}
+      {signedInUser &&
+        checkForResourceInStudyList(resourceData.id, studyListArr) && (
+          <button onClick={deleteFromStudyList}>Remove from study-list</button>
+        )}
     </div>
   );
 }

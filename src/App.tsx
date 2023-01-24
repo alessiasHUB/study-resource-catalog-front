@@ -6,7 +6,7 @@ import SignInPage from "./components/SignInPage";
 import NavBar from "./components/NavBar";
 import StudyListPage from "./components/StudyListPage";
 import axios from "axios";
-import { IUserData } from "./utils/interfaces";
+import { IStudyListData, IUserData } from "./utils/interfaces";
 import { useCallback, useEffect, useState } from "react";
 import { url } from "./utils/url";
 import "./App.css";
@@ -15,7 +15,9 @@ import AddResourcePage from "./components/AddResourcePage";
 function App() {
   const [users, setUsers] = useState<IUserData[]>([]);
   const [signedInUser, setSignedInUser] = useState<IUserData | undefined>();
+  const [studyListArr, setStudyListArr] = useState<IStudyListData[]>([]);
 
+  //---------------------------------------------------- get all user data
   const fetchAndStoreUsers = useCallback(async () => {
     const response = await axios.get(`${url}/users`);
     let userData: IUserData[] = response.data;
@@ -23,9 +25,19 @@ function App() {
     setUsers(userData);
   }, []);
 
+  //---------------------------------------------------- get study list for a specific user
+  const getStudyListForUser = useCallback(async () => {
+    if (signedInUser) {
+      const response = await axios.get(`${url}/study_list/${signedInUser.id}`);
+      let studyListData: IStudyListData[] = response.data;
+      setStudyListArr(studyListData);
+    }
+  }, [signedInUser]);
+
   useEffect(() => {
     fetchAndStoreUsers();
-  }, [fetchAndStoreUsers]);
+    getStudyListForUser();
+  }, [fetchAndStoreUsers, getStudyListForUser]);
 
   console.log("signedIn user", signedInUser);
   return (
@@ -36,7 +48,13 @@ function App() {
 
         <Route
           path="/catalog"
-          element={<CatalogPage signedInUser={signedInUser} />}
+          element={
+            <CatalogPage
+              allUsers={users}
+              signedInUser={signedInUser}
+              studyListArr={studyListArr}
+            />
+          }
         />
 
         <Route
@@ -45,12 +63,19 @@ function App() {
             <SignInPage userData={users} setSignedInUser={setSignedInUser} />
           }
         />
-        <Route path="/study_list" element={<StudyListPage />} />
+        {signedInUser && (
+          <Route
+            path="/study_list"
+            element={
+              <StudyListPage
+                signedInUser={signedInUser}
+                studyListArr={studyListArr}
+              />
+            }
+          />
+        )}
+        <Route path="/add_resource" element={<AddResourcePage signedInUser={signedInUser}/>} />
 
-        <Route
-          path="/add_resource"
-          element={<AddResourcePage signedInUser={signedInUser} />}
-        />
       </Routes>
     </div>
   );
