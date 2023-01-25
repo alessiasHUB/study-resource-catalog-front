@@ -34,8 +34,8 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
     youtube_channel: false,
     organisation: false,
   });
-  const [selectedTags, setSelectedTags]= useState<string[]>([])
-//---------------------------------------------------------------Code body
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  //---------------------------------------------------------------Code body
   const fetchAndStoreResources = useCallback(async () => {
     const response = await axios.get(`${url}/resources`);
     const resourceData: IResourceData[] = response.data;
@@ -53,17 +53,16 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
       return { ...prev, [resourcetype]: !prev[resourcetype] };
     });
   };
-  
+
   const handleCheckedTagsBox = (tag: string) => {
-    if(selectedTags.includes(tag)){
-      setSelectedTags(selectedTags.filter((el) => el !== tag)) 
-    } else{
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter((el) => el !== tag));
+    } else {
       setSelectedTags((prev) => {
-        return ([...prev, tag])
-      }
-    )}
-  }
-  console.log("i am set tags:", selectedTags)
+        return [...prev, tag];
+      });
+    }
+  };
 
   return (
     <>
@@ -91,23 +90,21 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
             );
           })}
         </div>
-          <div className="ctn-filter-by-tags">
-            <h3> FILTER BY TAG...</h3>
-            {tagsArr.map((tag) => {
-              return (
-                <div key={tag} > 
-                <input 
+        <div className="ctn-filter-by-tags">
+          <h3> FILTER BY TAG...</h3>
+          {tagsArr.map((tag) => {
+            return (
+              <div key={tag}>
+                <input
                   type="checkbox"
-                  id="checkbox" 
-                  value={tag} 
+                  id="checkbox"
+                  value={tag}
                   onChange={() => handleCheckedTagsBox(tag)}
-                  />
-                  <label htmlFor="checkbox">{tag}</label>
-                </div>
-              )
-            })
-
-            }
+                />
+                <label htmlFor="checkbox">{tag}</label>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -124,22 +121,23 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
           <p>Not recommended = 💩</p>
         </div>
         {resources.length > 0 &&
-          filterResources(searchInput, selectedTypes, resources).map(
-            (resource) => {
-              return (
-                <Resource
-                  resourceData={resource}
-                  signedInUser={signedInUser}
-                  fetchAndStoreResources={fetchAndStoreResources}
-                  key={resource.id}
-                />
-              );
-            }
-          )}
+          filterResources(
+            searchInput,
+            selectedTypes,
+            selectedTags,
+            resources
+          ).map((resource) => {
+            return (
+              <Resource
+                resourceData={resource}
+                signedInUser={signedInUser}
+                fetchAndStoreResources={fetchAndStoreResources}
+                key={resource.id}
+              />
+            );
+          })}
       </div>
-      <div>
-
-      </div>
+      <div></div>
     </>
   );
 }

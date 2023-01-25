@@ -50,7 +50,7 @@ interface IStudyListData {
   post_date: Date;
 }
 
-interface ITypes{
+interface ITypes {
   video: boolean;
   article: boolean;
   eBook: boolean;

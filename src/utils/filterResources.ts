@@ -6,6 +6,7 @@ import { ResourceType } from "./types";
 export const filterResources = (
   searchInput: string,
   allTypesStatusObj: ITypes,
+  allTagsStatusArr: string[],
   resourcesData: IResourceData[]
 ): IResourceData[] => {
   //----------------------------------------------------FIRST: Filter by search
@@ -26,8 +27,6 @@ export const filterResources = (
       checkedTypes.push(key as keyof ITypes);
     }
   }
-  console.log("CHECKED TYPES", checkedTypes);
-
   //-----------------------------------------------------------------------Filter by the 'type' checkbox
   const filteredByTypeCheckbox = filteredBySearch.filter((resource) => {
     if (checkedTypes.length > 0) {
@@ -36,5 +35,25 @@ export const filterResources = (
       return true;
     }
   });
-  return filteredByTypeCheckbox;
+  //---------------------------------------------------------------------Filter by tags checkboxes
+  const filteredByTagsCheckbox = filteredByTypeCheckbox.filter((resource) => {
+    if (allTagsStatusArr.length > 0) {
+      for (let tag of resource.tags) {
+        if (allTagsStatusArr.includes(tag)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } else {
+      return true;
+    }
+  });
+  return filteredByTagsCheckbox;
 };
+
+//   sample: ['react', 'front-end', 'html']
+//1. for each resoruce in resourceData
+// 2.  for each tag of single resource tagArr prop
+//is this tag included in allTagsStatus Arr? if yes return true
+//..........which returns this particular resoruce
