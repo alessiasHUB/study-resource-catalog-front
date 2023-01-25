@@ -1,7 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { url } from "../utils/url";
-import { IResourceData, IStudyListData, IUserData, ITypes } from "../utils/interfaces";
+import {
+  IResourceData,
+  IStudyListData,
+  IUserData,
+  ITypes,
+} from "../utils/interfaces";
 import Resource from "./Resource";
 import { Link } from "react-router-dom";
 import { tagsArr } from "../utils/tags";
@@ -39,8 +44,8 @@ function CatalogPage({
     youtube_channel: false,
     organisation: false,
   });
-  const [selectedTagsArr, setSelectedTagsArr]= useState<string[]>([])
-//---------------------------------------------------------------Code body
+  const [selectedTagsArr, setSelectedTagsArr] = useState<string[]>([]);
+  //---------------------------------------------------------------Code body
   const fetchAndStoreResources = useCallback(async () => {
     const response = await axios.get(`${url}/resources`);
     const resourceData: IResourceData[] = response.data;
@@ -58,20 +63,19 @@ function CatalogPage({
       return { ...prev, [resourcetype]: !prev[resourcetype] };
     });
   };
-  
+
   const handleCheckedTagsBox = (tag: string) => {
-    if(selectedTagsArr.includes(tag)){
-      setSelectedTagsArr(selectedTagsArr.filter((el) => el !== tag)) 
-    } else{
+    if (selectedTagsArr.includes(tag)) {
+      setSelectedTagsArr(selectedTagsArr.filter((el) => el !== tag));
+    } else {
       setSelectedTagsArr((prev) => {
-        return ([...prev, tag])
-      }
-    )}
-  }
+        return [...prev, tag];
+      });
+    }
+  };
 
   return (
     <>
-
       <div className="ctn-catalog-page-left">
         <input
           className="catalog-search-input"
@@ -96,23 +100,21 @@ function CatalogPage({
             );
           })}
         </div>
-          <div className="ctn-filter-by-tags">
-            <h3> FILTER BY TAG...</h3>
-            {tagsArr.map((tag) => {
-              return (
-                <div key={tag} > 
-                <input 
+        <div className="ctn-filter-by-tags">
+          <h3> FILTER BY TAG...</h3>
+          {tagsArr.map((tag) => {
+            return (
+              <div key={tag}>
+                <input
                   type="checkbox"
-                  id="checkbox" 
-                  value={tag} 
+                  id="checkbox"
+                  value={tag}
                   onChange={() => handleCheckedTagsBox(tag)}
-                  />
-                  <label htmlFor="checkbox">{tag}</label>
-                </div>
-              )
-            })
-
-            }
+                />
+                <label htmlFor="checkbox">{tag}</label>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -128,25 +130,29 @@ function CatalogPage({
           <p> Not used but recommended = 🔎</p>
           <p>Not recommended = 💩</p>
         </div>
-        {signedInUser && <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>}
+        {signedInUser && (
+          <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>
+        )}
         {resources.length > 0 &&
-          filterResources(searchInput, selectedTypesObj, selectedTagsArr, resources).map(
-            (resource) => {
-              return (
-                <Resource
-                  resourceData={resource}
-                  signedInUser={signedInUser}
-                  fetchAndStoreResources={fetchAndStoreResources}
-                  key={resource.id}
-                  allUsers={allUsers}
-                  studyListArr={studyListArr}
-                />
-              );
-            }
-          )}
+          filterResources(
+            searchInput,
+            selectedTypesObj,
+            selectedTagsArr,
+            resources
+          ).map((resource) => {
+            return (
+              <Resource
+                resourceData={resource}
+                signedInUser={signedInUser}
+                fetchAndStoreResources={fetchAndStoreResources}
+                key={resource.id}
+                allUsers={allUsers}
+                studyListArr={studyListArr}
+              />
+            );
+          })}
       </div>
-      <div>
-      </div>
+      <div></div>
     </>
   );
 }

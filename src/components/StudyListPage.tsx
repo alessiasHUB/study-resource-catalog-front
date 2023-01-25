@@ -9,7 +9,9 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
   const { signedInUser, studyListArr } = props;
   return (
     <>
-      {studyListArr.map((el) => <p>{el.resource_id}</p>)}
+      {studyListArr.map((el) => (
+        <p>{el.resource_id}</p>
+      ))}
     </>
   );
 }

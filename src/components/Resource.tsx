@@ -13,7 +13,6 @@ import Comment from "./Comment";
 import checkForResourceInStudyList from "../utils/is-res-in-study-list";
 import "./CatalogPage.css";
 
-
 interface ResourceProps {
   resourceData: IResourceData;
   signedInUser: IUserData | undefined;
@@ -86,9 +85,12 @@ function Resource({
         );
       }
     } catch (error) {
-      console.error("Woops... issue with DELETE to study_list request: ", error);
+      console.error(
+        "Woops... issue with DELETE to study_list request: ",
+        error
+      );
     }
-  }
+  };
 
   const handleFullViewClicked = () => {
     setIsFullView((prev) => !prev);
