@@ -1,5 +1,3 @@
-import { ResourceType } from "./types";
-
 interface IUserData {
   id: number;
   username: string;

@@ -7,8 +7,6 @@ import {
   IStudyListData,
 } from "../utils/interfaces";
 import { url } from "../utils/url";
-
-import "./resource.css";
 import Comment from "./Comment";
 import checkForResourceInStudyList from "../utils/is-res-in-study-list";
 import "./CatalogPage.css";

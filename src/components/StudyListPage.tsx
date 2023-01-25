@@ -7,11 +7,14 @@ interface StudyListProps {
 
 export default function StudyListPage(props: StudyListProps): JSX.Element {
   const { signedInUser, studyListArr } = props;
+  console.log(signedInUser);
   return (
     <>
-      {studyListArr.map((el) => (
-        <p>{el.resource_id}</p>
-      ))}
+      <>
+        {studyListArr.map((el) => (
+          <p>{el.resource_id}</p>
+        ))}
+      </>
     </>
   );
 }

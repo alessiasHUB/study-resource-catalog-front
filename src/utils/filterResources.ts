@@ -30,7 +30,9 @@ export const filterResources = (
   //-----------------------------------------------------------------------Filter by the 'type' checkbox
   const filteredByTypeCheckbox = filteredBySearch.filter((resource) => {
     if (checkedTypes.length > 0) {
-      if (checkedTypes.includes(resource.type as keyof ITypes)) return true;
+      return checkedTypes.includes(resource.type as keyof ITypes)
+        ? true
+        : false;
     } else {
       return true;
     }
@@ -39,15 +41,10 @@ export const filterResources = (
   const filteredByTagsCheckbox = filteredByTypeCheckbox.filter((resource) => {
     if (selectedTagsArr.length > 0) {
       for (let tag of resource.tags) {
-        if (selectedTagsArr.includes(tag)) {
-          return true;
-        } else {
-          return false;
-        }
+        return selectedTagsArr.includes(tag) ? true : false;
       }
-    } else {
-      return true;
     }
+    return true;
   });
   return filteredByTagsCheckbox;
 };
