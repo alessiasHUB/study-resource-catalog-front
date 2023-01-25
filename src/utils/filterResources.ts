@@ -29,7 +29,7 @@ export const filterResources = (
 
   //Filter by the 'type' checkbox
   const filteredByTypeCheckbox = filteredBySearch.filter((resource) => {
-    if (checkedTypes.length > 1) {
+    if (checkedTypes.length > 0) {
       if (checkedTypes.includes(resource.type as keyof ITypes)) return true;
     } else {
       return true;
