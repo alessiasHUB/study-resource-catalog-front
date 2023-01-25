@@ -45,9 +45,11 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
     fetchAndStoreResources();
   }, [fetchAndStoreResources]);
 
-  const handleCheckedBox = (type: ResourceType) => {
+  const handleCheckedBox = (resourcetype: ResourceType) => {
     setSelectedTypes((prev) => {
-      return { ...prev, [type]: !prev[type] };
+      //return an update of setSelectedTypes where the key (type) in question is switched from true --> false (or vice versa)
+      // take the obj that denotes which types have been selected and update another key value pair where the key is the resourceType and the valu
+      return { ...prev, [resourcetype]: !prev[resourcetype] };
     });
   };
 
@@ -103,6 +105,9 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
               );
             }
           )}
+      </div>
+      <div>
+        
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 import { ITypes } from "./interfaces";
 
+//hey TS! WE only want to deal with resourceTypes 
 export type ResourceType = keyof ITypes;
 
 // export const typesArr: ResourceType[] = [
