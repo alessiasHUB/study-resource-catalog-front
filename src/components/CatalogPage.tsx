@@ -18,7 +18,7 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
   //-----------------------------------------------------------------STATES
   const [resources, setResources] = useState<IResourceData[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
-  const [selectedTypes, setSelectedTypes] = useState<ITypes>({
+  const [selectedTypesObj, setSelectedTypesObj] = useState<ITypes>({
     video: false,
     article: false,
     eBook: false,
@@ -34,8 +34,8 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
     youtube_channel: false,
     organisation: false,
   });
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  //---------------------------------------------------------------Code body
+  const [selectedTagsArr, setSelectedTagsArr]= useState<string[]>([])
+//---------------------------------------------------------------Code body
   const fetchAndStoreResources = useCallback(async () => {
     const response = await axios.get(`${url}/resources`);
     const resourceData: IResourceData[] = response.data;
@@ -47,22 +47,22 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
   }, [fetchAndStoreResources]);
 
   const handleCheckedTypeBox = (resourcetype: ResourceType) => {
-    setSelectedTypes((prev) => {
-      //return an update of setSelectedTypes where the key (type) in question is switched from true --> false (or vice versa)
+    setSelectedTypesObj((prev) => {
+      //return an update of setSelectedTypesObj where the key (type) in question is switched from true --> false (or vice versa)
       // take the obj that denotes which types have been selected and update another key value pair where the key is the resourceType and the valu
       return { ...prev, [resourcetype]: !prev[resourcetype] };
     });
   };
-
+  
   const handleCheckedTagsBox = (tag: string) => {
-    if (selectedTags.includes(tag)) {
-      setSelectedTags(selectedTags.filter((el) => el !== tag));
-    } else {
-      setSelectedTags((prev) => {
-        return [...prev, tag];
-      });
-    }
-  };
+    if(selectedTagsArr.includes(tag)){
+      setSelectedTagsArr(selectedTagsArr.filter((el) => el !== tag)) 
+    } else{
+      setSelectedTagsArr((prev) => {
+        return ([...prev, tag])
+      }
+    )}
+  }
 
   return (
     <>
@@ -90,21 +90,23 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
             );
           })}
         </div>
-        <div className="ctn-filter-by-tags">
-          <h3> FILTER BY TAG...</h3>
-          {tagsArr.map((tag) => {
-            return (
-              <div key={tag}>
-                <input
+          <div className="ctn-filter-by-tags">
+            <h3> FILTER BY TAG...</h3>
+            {tagsArr.map((tag) => {
+              return (
+                <div key={tag} > 
+                <input 
                   type="checkbox"
-                  id="checkbox"
-                  value={tag}
+                  id="checkbox" 
+                  value={tag} 
                   onChange={() => handleCheckedTagsBox(tag)}
-                />
-                <label htmlFor="checkbox">{tag}</label>
-              </div>
-            );
-          })}
+                  />
+                  <label htmlFor="checkbox">{tag}</label>
+                </div>
+              )
+            })
+
+            }
         </div>
       </div>
 
@@ -121,23 +123,22 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
           <p>Not recommended = 💩</p>
         </div>
         {resources.length > 0 &&
-          filterResources(
-            searchInput,
-            selectedTypes,
-            selectedTags,
-            resources
-          ).map((resource) => {
-            return (
-              <Resource
-                resourceData={resource}
-                signedInUser={signedInUser}
-                fetchAndStoreResources={fetchAndStoreResources}
-                key={resource.id}
-              />
-            );
-          })}
+          filterResources(searchInput, selectedTypesObj, selectedTagsArr, resources).map(
+            (resource) => {
+              return (
+                <Resource
+                  resourceData={resource}
+                  signedInUser={signedInUser}
+                  fetchAndStoreResources={fetchAndStoreResources}
+                  key={resource.id}
+                />
+              );
+            }
+          )}
       </div>
-      <div></div>
+      <div>
+
+      </div>
     </>
   );
 }
