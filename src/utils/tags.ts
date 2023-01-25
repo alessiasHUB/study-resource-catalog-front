@@ -1,4 +1,4 @@
-export const tagsArr = [
+export const tagsArr: string[] = [
   "React",
   "TypeScript",
   "HTML",

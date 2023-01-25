@@ -15,9 +15,9 @@ interface CatalogPageProps {
 }
 
 function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
+  //-----------------------------------------------------------------STATES
   const [resources, setResources] = useState<IResourceData[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
-
   const [selectedTypes, setSelectedTypes] = useState<ITypes>({
     video: false,
     article: false,
@@ -34,7 +34,8 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
     youtube_channel: false,
     organisation: false,
   });
-
+  const [selectedTags, setSelectedTags]= useState<string[]>([])
+//---------------------------------------------------------------Code body
   const fetchAndStoreResources = useCallback(async () => {
     const response = await axios.get(`${url}/resources`);
     const resourceData: IResourceData[] = response.data;
@@ -45,13 +46,24 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
     fetchAndStoreResources();
   }, [fetchAndStoreResources]);
 
-  const handleCheckedBox = (resourcetype: ResourceType) => {
+  const handleCheckedTypeBox = (resourcetype: ResourceType) => {
     setSelectedTypes((prev) => {
       //return an update of setSelectedTypes where the key (type) in question is switched from true --> false (or vice versa)
       // take the obj that denotes which types have been selected and update another key value pair where the key is the resourceType and the valu
       return { ...prev, [resourcetype]: !prev[resourcetype] };
     });
   };
+  
+  const handleCheckedTagsBox = (tag: string) => {
+    if(selectedTags.includes(tag)){
+      setSelectedTags(selectedTags.filter((el) => el !== tag)) 
+    } else{
+      setSelectedTags((prev) => {
+        return ([...prev, tag])
+      }
+    )}
+  }
+  console.log("i am set tags:", selectedTags)
 
   return (
     <>
@@ -63,7 +75,8 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
           placeholder="search here..."
         ></input>
 
-        <div className="ctn-sort-by-type">
+        <div className="ctn-filter-by-type">
+          <h3> FILTER BY TYPE...</h3>
           {typesArr.map((type) => {
             return (
               <div key={type}>
@@ -71,12 +84,30 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
                   type="checkbox"
                   id="checkbox"
                   value={type}
-                  onChange={() => handleCheckedBox(type)}
+                  onChange={() => handleCheckedTypeBox(type)}
                 />
                 <label htmlFor="checkbox">{type}</label>
               </div>
             );
           })}
+        </div>
+          <div className="ctn-filter-by-tags">
+            <h3> FILTER BY TAG...</h3>
+            {tagsArr.map((tag) => {
+              return (
+                <div key={tag} > 
+                <input 
+                  type="checkbox"
+                  id="checkbox" 
+                  value={tag} 
+                  onChange={() => handleCheckedTagsBox(tag)}
+                  />
+                  <label htmlFor="checkbox">{tag}</label>
+                </div>
+              )
+            })
+
+            }
         </div>
       </div>
 
@@ -107,7 +138,7 @@ function CatalogPage({ signedInUser }: CatalogPageProps): JSX.Element {
           )}
       </div>
       <div>
-        
+
       </div>
     </>
   );
