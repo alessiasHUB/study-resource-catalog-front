@@ -8,10 +8,9 @@ import {
   ILikesData,
 } from "../utils/interfaces";
 import { url } from "../utils/url";
-import "./resource.css";
 import "./like-btns.css";
 import Comment from "./Comment";
-import findResourceInLikes from "../utils/find-resource-in-likes"; 
+import findResourceInLikes from "../utils/find-resource-in-likes";
 import checkForResourceInStudyList from "../utils/is-res-in-study-list";
 import "./CatalogPage.css";
 
@@ -267,7 +266,6 @@ function Resource({
             </button>
           </div>
         )}
-
       <button className="full-view-btn" onClick={handleFullViewClicked}>
         Full View
       </button>
