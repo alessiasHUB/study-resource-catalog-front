@@ -33,6 +33,7 @@ function App() {
       setStudyListArr(studyListData);
     }
   }, [signedInUser]);
+  console.log("i am study list", studyListArr);
 
   useEffect(() => {
     fetchAndStoreUsers();

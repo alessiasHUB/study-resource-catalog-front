@@ -12,6 +12,19 @@
 .add-resource-btn:hover {
   border-color: rgba(34, 154, 184, 0.863);
 }
+
+.ctn-catalog-page-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 800px;
+  display: inline-flexbox;
+}
+.ctn-resource-usage-key {
+  border: solid 5px rgb(192, 255, 197);
+}
+
 /*
 -------RESOURCE--------
 */
@@ -19,6 +32,6 @@
   border-radius: 5px;
   border-width: 2px;
   border-style: solid;
-  background-color: aliceblue;
+  background-color: rgb(119, 151, 179);
   margin: 5px;
 }
