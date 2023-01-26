@@ -1,7 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { url } from "../utils/url";
+
 import {
+  ILikesData
   IResourceData,
   IStudyListData,
   IUserData,
@@ -27,6 +29,7 @@ function CatalogPage({
   studyListArr,
 }: CatalogPageProps): JSX.Element {
   const [resources, setResources] = useState<IResourceData[]>([]);
+  const [userLikes, setUserLikes] = useState<ILikesData[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
   const [selectedTypesObj, setSelectedTypesObj] = useState<ITypes>({
     video: false,
@@ -52,9 +55,18 @@ function CatalogPage({
     setResources(resourceData);
   }, []);
 
+  const getSignedInUserLikes = useCallback(async () => {
+    if (signedInUser) {
+      const response = await axios.get(`${url}/likes/${signedInUser.id}`);
+      const resourceData: ILikesData[] = response.data;
+      setUserLikes(resourceData);
+    }
+  }, [signedInUser]);
+
   useEffect(() => {
     fetchAndStoreResources();
-  }, [fetchAndStoreResources]);
+    getSignedInUserLikes();
+  }, [fetchAndStoreResources, getSignedInUserLikes]);
 
   const handleCheckedTypeBox = (resourcetype: ResourceType) => {
     setSelectedTypesObj((prev) => {
@@ -148,6 +160,7 @@ function CatalogPage({
                 key={resource.id}
                 allUsers={allUsers}
                 studyListArr={studyListArr}
+                userLikes={userLikes}
               />
             );
           })}

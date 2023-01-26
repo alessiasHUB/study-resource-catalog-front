@@ -5,9 +5,13 @@ import {
   IUserData,
   ICommentData,
   IStudyListData,
+  ILikesData,
 } from "../utils/interfaces";
 import { url } from "../utils/url";
+import "./resource.css";
+import "./like-btns.css";
 import Comment from "./Comment";
+import findResourceInLikes from "../utils/find-resource-in-likes"; 
 import checkForResourceInStudyList from "../utils/is-res-in-study-list";
 import "./CatalogPage.css";
 
@@ -15,7 +19,9 @@ interface ResourceProps {
   resourceData: IResourceData;
   signedInUser: IUserData | undefined;
   fetchAndStoreResources: () => Promise<void>;
+  getSignedInUserLikes: () => Promise<void>;
   allUsers: IUserData[];
+  userLikes: ILikesData[];
   studyListArr: IStudyListData[];
 }
 
@@ -23,7 +29,9 @@ function Resource({
   resourceData,
   signedInUser,
   fetchAndStoreResources,
+  getSignedInUserLikes,
   allUsers,
+  userLikes,
   studyListArr,
 }: ResourceProps): JSX.Element {
   const [isFullView, setIsFullView] = useState<boolean>(false);
@@ -105,7 +113,7 @@ function Resource({
         return "🔍";
     }
   }
-
+  //-----------------------------------handle like and dislike btns
   async function handleLikeClick() {
     if (signedInUser !== undefined) {
       await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}`, {
@@ -113,8 +121,9 @@ function Resource({
       });
     }
     fetchAndStoreResources();
+    getSignedInUserLikes();
+    console.log("POST a like");
   }
-
   async function handleDislikeClick() {
     if (signedInUser !== undefined) {
       await axios.post(`${url}/likes/${resourceData.id}/${signedInUser.id}`, {
@@ -122,6 +131,28 @@ function Resource({
       });
     }
     fetchAndStoreResources();
+    getSignedInUserLikes();
+    console.log("Post dislike");
+  }
+  async function handleRemoveLike() {
+    if (signedInUser !== undefined) {
+      await axios.delete(
+        `${url}/likes/${resourceData.id}/${signedInUser.id}?liked=${true}`
+      );
+    }
+    fetchAndStoreResources();
+    getSignedInUserLikes();
+    console.log("DELETE like");
+  }
+  async function handleRemoveDislike() {
+    if (signedInUser !== undefined) {
+      await axios.delete(
+        `${url}/likes/${resourceData.id}/${signedInUser.id}?liked=${false}`
+      );
+    }
+    fetchAndStoreResources();
+    getSignedInUserLikes();
+    console.log("DELETE dislike");
   }
 
   return (
@@ -177,16 +208,66 @@ function Resource({
       <div className="resource-link-btn">
         <a href={resourceData.link}>Check it out</a>
       </div>
-      {signedInUser !== undefined && (
-        <div>
-          <button className="like-resource-btn" onClick={handleLikeClick}>
-            👍|{resourceData.likes}
-          </button>
-          <button className="dislike-resource-btn" onClick={handleDislikeClick}>
-            👎|{resourceData.dislikes}
-          </button>
-        </div>
-      )}
+      {signedInUser !== undefined &&
+        !findResourceInLikes(resourceData.id, userLikes) && (
+          <div>
+            <button
+              className="false-like-resource-btn"
+              onClick={handleLikeClick}
+            >
+              👍|{resourceData.likes}
+            </button>
+            <button
+              className="false-dislike-resource-btn"
+              onClick={handleDislikeClick}
+            >
+              👎|{resourceData.dislikes}
+            </button>
+          </div>
+        )}
+      {signedInUser !== undefined &&
+        findResourceInLikes(resourceData.id, userLikes) === "like" && (
+          <div>
+            <button
+              className={
+                findResourceInLikes(resourceData.id, userLikes) +
+                "d-resource-btn"
+              }
+              onClick={handleRemoveLike}
+            >
+              👍|{resourceData.likes}
+            </button>
+            <button
+              className="false-dislike-resource-btn"
+              // onClick={handleDislikeClick}
+              disabled
+            >
+              👎|{resourceData.dislikes}
+            </button>
+          </div>
+        )}
+      {signedInUser !== undefined &&
+        findResourceInLikes(resourceData.id, userLikes) === "dislike" && (
+          <div>
+            <button
+              className="false-like-resource-btn"
+              // onClick={handleLikeClick}
+              disabled
+            >
+              👍|{resourceData.likes}
+            </button>
+            <button
+              className={
+                findResourceInLikes(resourceData.id, userLikes) +
+                "d-resource-btn"
+              }
+              onClick={handleRemoveDislike}
+            >
+              👎|{resourceData.dislikes}
+            </button>
+          </div>
+        )}
+
       <button className="full-view-btn" onClick={handleFullViewClicked}>
         Full View
       </button>

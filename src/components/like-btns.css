@@ -1,0 +1,15 @@
+.false-like-resource-btn {
+  background-color: white;
+}
+
+.false-dislike-resource-btn {
+  background-color: white;
+}
+
+.liked-resource-btn {
+  background-color: rgb(20, 255, 177);
+}
+
+.disliked-resource-btn {
+  background-color: rgb(231, 20, 55);
+}
