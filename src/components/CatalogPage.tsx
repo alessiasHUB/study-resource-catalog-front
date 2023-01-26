@@ -3,7 +3,7 @@ import axios from "axios";
 import { url } from "../utils/url";
 
 import {
-  ILikesData
+  ILikesData,
   IResourceData,
   IStudyListData,
   IUserData,
@@ -156,6 +156,7 @@ function CatalogPage({
               <Resource
                 resourceData={resource}
                 signedInUser={signedInUser}
+                getSignedInUserLikes={getSignedInUserLikes}
                 fetchAndStoreResources={fetchAndStoreResources}
                 key={resource.id}
                 allUsers={allUsers}

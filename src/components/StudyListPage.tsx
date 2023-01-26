@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IResourceData, IStudyListData, IUserData } from "../utils/interfaces";
 import { url } from "../utils/url";
 
@@ -12,6 +12,7 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
   const [studyListResources, setStudyListResources] = useState<IResourceData[]>(
     []
   );
+  const [isFullView, setIsFullView] = useState<boolean>(false);
   const { signedInUser, studyListArr } = props;
 
   async function getStudyListResources(userID: number) {
@@ -19,12 +20,68 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
     let studyListResourcesData: IResourceData[] = response.data;
     setStudyListResources(studyListResourcesData);
   }
+
+  useEffect(() => {
+    getStudyListResources(signedInUser.id);
+    console.log("useEffect is running");
+  }, []);
+
+  const handleFullViewClicked = () => {
+    setIsFullView((prev) => !prev);
+  };
+
   console.log(studyListResources);
+
   return (
     <>
-      <button onClick={() => getStudyListResources(signedInUser.id)}>
-        Refresh resources for this study list bro
-      </button>
+      {studyListResources.map((resource: IResourceData) => {
+        return (
+          <div key={resource.id}>
+            <h4> {resource.title}</h4>
+            <p> {String(resource.post_date)} </p>
+
+            {/* -------------------------------if isFullView is true - render full description and all tags */}
+            {isFullView ? (
+              <>
+                <p className="resource-description">{resource.description}</p>
+                {resource.tags.map((tag) => {
+                  return (
+                    <div className="resource-tag" key={tag}>
+                      {tag}
+                    </div>
+                  );
+                })}
+              </>
+            ) : (
+              // ---------------------------------if isFullView is false - render reduced description and 3 tags
+              <>
+                <p className="resource-description">
+                  {resource.description.slice(0, 30)}...
+                </p>
+                {resource.tags
+                  .filter((el, index) => index < 3)
+                  .map((tag) => {
+                    return (
+                      <div className="resource-tag" key={tag}>
+                        {tag}
+                      </div>
+                    );
+                  })}
+              </>
+            )}
+            <div>
+              {/* -------------------------------------end of conditional rendering for isFullView*/}
+              <div className="resource-link-btn">
+                <a href={resource.link}>Check it out</a>
+              </div>
+              <button className="full-view-btn" onClick={handleFullViewClicked}>
+                {" "}
+                Full View{" "}
+              </button>
+            </div>
+          </div>
+        );
+      })}
     </>
   );
 }
