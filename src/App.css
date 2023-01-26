@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: rgb(193, 231, 218);
 }
 
 .App-logo {
@@ -28,6 +29,11 @@
   color: #61dafb;
 }
 
+.ctn-nav {
+  color: rgb(7, 119, 104);
+  border: solid rgb(7, 119, 104) 10px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +42,5 @@
     transform: rotate(360deg);
   }
 }
+
+/* //update for thurs */

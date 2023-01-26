@@ -4,13 +4,16 @@ import {
   IResourceData,
   IUserData,
   ICommentData,
+  IStudyListData,
   ILikesData,
 } from "../utils/interfaces";
 import { url } from "../utils/url";
 import "./resource.css";
 import "./like-btns.css";
 import Comment from "./Comment";
-import findResourceInLikes from "../utils/find-resource-in-likes";
+import findResourceInLikes from "../utils/find-resource-in-likes"; 
+import checkForResourceInStudyList from "../utils/is-res-in-study-list";
+import "./CatalogPage.css";
 
 interface ResourceProps {
   resourceData: IResourceData;
@@ -19,6 +22,7 @@ interface ResourceProps {
   getSignedInUserLikes: () => Promise<void>;
   allUsers: IUserData[];
   userLikes: ILikesData[];
+  studyListArr: IStudyListData[];
 }
 
 function Resource({
@@ -28,6 +32,7 @@ function Resource({
   getSignedInUserLikes,
   allUsers,
   userLikes,
+  studyListArr,
 }: ResourceProps): JSX.Element {
   const [isFullView, setIsFullView] = useState<boolean>(false);
   const [comments, setComments] = useState<ICommentData[]>();
@@ -75,6 +80,21 @@ function Resource({
       }
     } catch (error) {
       console.error("Woops... issue with POST to study_list request: ", error);
+    }
+  };
+
+  const deleteFromStudyList = async () => {
+    try {
+      if (signedInUser) {
+        await axios.delete(
+          url + `/study_list/${resourceData.id}/${signedInUser.id}`
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Woops... issue with DELETE to study_list request: ",
+        error
+      );
     }
   };
 
@@ -247,6 +267,7 @@ function Resource({
             </button>
           </div>
         )}
+
       <button className="full-view-btn" onClick={handleFullViewClicked}>
         Full View
       </button>
@@ -276,9 +297,14 @@ function Resource({
           </div>
         </>
       )}
-      {signedInUser && (
-        <button onClick={postToStudyList}>➕ Add to study-list</button>
-      )}
+      {signedInUser &&
+        !checkForResourceInStudyList(resourceData.id, studyListArr) && (
+          <button onClick={postToStudyList}>➕ Add to study-list</button>
+        )}{" "}
+      {signedInUser &&
+        checkForResourceInStudyList(resourceData.id, studyListArr) && (
+          <button onClick={deleteFromStudyList}>Remove from study-list</button>
+        )}
     </div>
   );
 }

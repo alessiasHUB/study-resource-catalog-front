@@ -17,6 +17,14 @@ interface IResourceData {
   usage: string;
   user_id: number;
 }
+interface INewResourceData {
+  description: string;
+  link: string;
+  tags: string[];
+  title: string;
+  type: string;
+  usage: string;
+}
 
 interface ICommentData {
   id: number;
@@ -40,10 +48,29 @@ interface IStudyListData {
   post_date: Date;
 }
 
+interface ITypes {
+  video: boolean;
+  article: boolean;
+  eBook: boolean;
+  podcast: boolean;
+  exercise: boolean;
+  exercise_set: boolean;
+  software_tool: boolean;
+  course: boolean;
+  diagram: boolean;
+  cheat_sheet: boolean;
+  reference: boolean;
+  resource_list: boolean;
+  youtube_channel: boolean;
+  organisation: boolean;
+}
+
 export type {
   IUserData,
   IResourceData,
   ICommentData,
   ILikesData,
   IStudyListData,
+  INewResourceData,
+  ITypes,
 };

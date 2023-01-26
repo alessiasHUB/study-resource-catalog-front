@@ -1,0 +1,40 @@
+/*
+-------CATALOG_PAGE--------
+*/
+.add-resource-btn {
+  border: 2px solid gray;
+  border-radius: 20px;
+  width: fit-content;
+  margin: 20px auto;
+  padding: 2px 5px;
+}
+
+.add-resource-btn:hover {
+  border-color: rgba(34, 154, 184, 0.863);
+}
+
+.ctn-catalog-page-left {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 800px;
+  display: inline-flexbox;
+}
+ctn-catalog-page-left {
+  display: inline-flexbox;
+}
+.ctn-resource-usage-key {
+  border: solid 5px rgb(192, 255, 197);
+}
+
+/*
+-------RESOURCE--------
+*/
+.ctn-resource {
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+  background-color: rgb(119, 151, 179);
+  margin: 5px;
+}

@@ -17,6 +17,7 @@ function App() {
   const [signedInUser, setSignedInUser] = useState<IUserData | undefined>();
   const [studyListArr, setStudyListArr] = useState<IStudyListData[]>([]);
 
+  //---------------------------------------------------- get all user data
   const fetchAndStoreUsers = useCallback(async () => {
     const response = await axios.get(`${url}/users`);
     let userData: IUserData[] = response.data;
@@ -24,6 +25,7 @@ function App() {
     setUsers(userData);
   }, []);
 
+  //---------------------------------------------------- get study list for a specific user
   const getStudyListForUser = useCallback(async () => {
     if (signedInUser) {
       const response = await axios.get(`${url}/study_list/${signedInUser.id}`);
@@ -31,6 +33,7 @@ function App() {
       setStudyListArr(studyListData);
     }
   }, [signedInUser]);
+  console.log("i am study list", studyListArr);
 
   useEffect(() => {
     fetchAndStoreUsers();
@@ -46,7 +49,13 @@ function App() {
 
         <Route
           path="/catalog"
-          element={<CatalogPage allUsers={users} signedInUser={signedInUser} />}
+          element={
+            <CatalogPage
+              allUsers={users}
+              signedInUser={signedInUser}
+              studyListArr={studyListArr}
+            />
+          }
         />
 
         <Route
@@ -66,7 +75,10 @@ function App() {
             }
           />
         )}
-        <Route path="/add_resource" element={<AddResourcePage />} />
+        <Route
+          path="/add_resource"
+          element={<AddResourcePage signedInUser={signedInUser} />}
+        />
       </Routes>
     </div>
   );
