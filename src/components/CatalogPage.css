@@ -14,11 +14,14 @@
 }
 
 .ctn-catalog-page-left {
-  position: absolute;
+  position:sticky;
   top: 0;
   left: 0;
   width: 280px;
   height: 800px;
+  display: inline-flexbox;
+}
+ctn-catalog-page-left {
   display: inline-flexbox;
 }
 .ctn-resource-usage-key {
