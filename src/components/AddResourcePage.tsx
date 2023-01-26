@@ -1,6 +1,9 @@
 import { typesArr } from "../utils/types";
 import { usageArr } from "../utils/usage";
 import { tagsArr } from "../utils/tags";
+import { useState } from "react";
+import axios from "axios";
+import { url } from "../utils/url";
 
 import { url } from "../utils/url";
 import { IUserData, INewResourceData } from "../utils/interfaces";
@@ -14,6 +17,17 @@ export default function AddResourcePage({
   signedInUser,
 }: AddResourcePageProps): JSX.Element {
   //const [tags, setTags] = useState<string[]>([]);  ------------------------replaced by dropdown
+
+  const [link, setLink] = useState<boolean>();
+
+  async function getMatchingResource(inputLink: string) {
+    const response = await axios.get(`${url}/resources/link?link=${inputLink}`);
+    if (response.data.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   const handleSubmitResource = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,7 +74,16 @@ export default function AddResourcePage({
       <h1>Add new resource</h1>
       <form onSubmit={handleSubmitResource}>
         <input placeholder="title" type="text" id="title" required />
-        <input placeholder="link" type="text" id="link" required />
+        <input
+          placeholder="link"
+          type="text"
+          id="link"
+          required
+          onChange={async (e) =>
+            setLink(await getMatchingResource(e.target.value))
+          }
+        />
+        {link && <p>This resource is already in the database!</p>}
         <textarea placeholder="description" id="description" required />
         {/* {tagsArr.map((el, i) => ( ------------------------------------------replaced by select tags below :(
           <button key={i} onClick={() => setTags([...tags])}>
@@ -89,7 +112,13 @@ export default function AddResourcePage({
           ))}
         </select>
 
-        <button type="submit">SUBMIT</button>
+        {link ? (
+          <button type="submit" disabled>
+            SUBMIT
+          </button>
+        ) : (
+          <button type="submit">SUBMIT</button>
+        )}
       </form>
     </>
   );
