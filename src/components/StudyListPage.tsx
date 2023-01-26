@@ -9,29 +9,22 @@ interface StudyListProps {
 }
 
 export default function StudyListPage(props: StudyListProps): JSX.Element {
-  const [studyListResources, setStudyListResources] = useState<IResourceData[]>([])
+  const [studyListResources, setStudyListResources] = useState<IResourceData[]>(
+    []
+  );
   const { signedInUser, studyListArr } = props;
-  console.log(signedInUser);
 
-  // extract all the resource id's needed
-  function extractResourceIds(studyListArr: IStudyListData[]): number[] {
-    const studyListIdArr: number[] = studyListArr.map((studyItem) => {
-      return studyItem.resource_id
-    })
-    return studyListIdArr
-  }
-  console.log(extractResourceIds(studyListArr))
-
-  // // send array of id's to backend and get all study list resources back
-  async function getStudyListResources(resourceIDs: number[]) {
-    const response = await axios.get(`${url}//study_resources/:${resourceIDs}`);
+  async function getStudyListResources(userID: number) {
+    const response = await axios.get(`${url}/study_resources/${userID}`);
     let studyListResourcesData: IResourceData[] = response.data;
     setStudyListResources(studyListResourcesData);
-  };
-console.log(studyListResources)
+  }
+  console.log(studyListResources);
   return (
     <>
-        <button onClick={() => getStudyListResources(extractResourceIds(studyListArr))}>Refresh resources for this study list bro</button>
+      <button onClick={() => getStudyListResources(signedInUser.id)}>
+        Refresh resources for this study list bro
+      </button>
     </>
   );
 }
