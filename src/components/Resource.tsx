@@ -157,7 +157,7 @@ function Resource({
 
   return (
     <div className="ctn-resource">
-      <p className="resource-title">{resourceData.title}</p>
+      <h2 className="resource-title">💡 {resourceData.title}</h2>
       <p className="resource-post-date">
         Posted: {dateFormatting(resourceData.post_date)}
       </p>
@@ -176,11 +176,11 @@ function Resource({
           </div>
         )}
       </div>
-      <p className="resource-type">{resourceData.type}</p>
+      <h4 className="resource-type">{resourceData.type}</h4>
       {/* -------------------------------if isFullView is true - render full description and all tags */}
       {isFullView ? (
         <>
-          <p className="resource-description">{resourceData.description}</p>
+          <h5 className="resource-description">{resourceData.description}</h5>
           {resourceData.tags.map((tag) => {
             return (
               <div className="resource-tag" key={tag}>
@@ -272,7 +272,7 @@ function Resource({
       <button className="full-view-btn" onClick={handleFullViewClicked}>
         Full View
       </button>
-      <button onClick={() => handleTopLvCommentBtn(resourceData.id)}>
+      <button className="comments-btn" onClick={() => handleTopLvCommentBtn(resourceData.id)}>
         👀 Comments
       </button>
       {comments && (
@@ -283,7 +283,7 @@ function Resource({
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
               />
-              <button onClick={() => handleSubmitNewComment(newComment)}>
+              <button className="submit-btn" onClick={() => handleSubmitNewComment(newComment)}>
                 Submit Comment
               </button>
             </div>
@@ -300,11 +300,11 @@ function Resource({
       )}
       {signedInUser &&
         !checkForResourceInStudyList(resourceData.id, studyListArr) && (
-          <button onClick={postToStudyList}>➕ Add to study-list</button>
+          <button className="add-studyList-btn" onClick={postToStudyList}>➕ Add to study-list</button>
         )}{" "}
       {signedInUser &&
         checkForResourceInStudyList(resourceData.id, studyListArr) && (
-          <button onClick={deleteFromStudyList}>Remove from study-list</button>
+          <button className="rm-studyList-btn" onClick={deleteFromStudyList}>Remove from study-list</button>
         )}
     </div>
   );

@@ -2,15 +2,17 @@
 -------CATALOG_PAGE--------
 */
 .add-resource-btn {
-  border: 2px solid gray;
+  border: 2px solid blue;
   border-radius: 20px;
   width: fit-content;
   margin: 20px auto;
   padding: 2px 5px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .add-resource-btn:hover {
-  border-color: rgba(34, 154, 184, 0.863);
+  border-color: rgb(9, 247, 255);
+  background-color: rgb(9, 247, 255);
 }
 
 .ctn-catalog-page-left {
@@ -20,7 +22,6 @@
   z-index: 1;
   width: 18.5em;
   height: auto;
-  border: 5px solid purple;
   margin-right: auto;
 }
 /* ------------RIGHT SIDE  */
@@ -28,14 +29,29 @@
   position: absolute;
   display: sticky;
   float: right;
-  border: 0.3em solid blue;
   left: 20em;
 }
 .ctn-filter-by-type {
-  border: 5px solid pink;
+  font-family: 'Courier New', Courier, monospace;
+  color: navy ;
+}
+.type-title{
+  background-color: rgb(152, 216, 228) ;
+  color: white;
+  text-shadow: 2px 2px 5px rgb(0, 14, 90);
+  padding: .2em;
+  margin: .2cm;
 }
 .ctn-filter-by-tags {
-  border: 5px solid red;
+  font-family: 'Courier New', Courier, monospace;
+  color: navy ;
+}
+.tag-title{
+  background-color: rgb(152, 216, 228) ;
+  color: white;
+  text-shadow: 2px 2px 5px rgb(0, 14, 90);
+  padding: .2em;
+  margin: .2cm;
 }
 
 /*
@@ -45,15 +61,93 @@
   width: 50em;
   border-radius: 5px;
   border-width: 2px;
-  border: solid rgb(20, 11, 93);
-  background-color: rgb(119, 151, 179);
-  margin-top: 0.5em;
+  color: navy ;
+  background-color: rgb(152, 216, 228);
+  margin-top: 0em;
   margin-bottom: 0.5em;
   margin-right: 0.5em;
   margin-left: 0em;
+  font-family: 'Courier New', Courier, monospace;
 }
 .ctn-resource-usage-key {
   border: solid 5px rgb(192, 255, 197);
   top: 100px;
   left: 500px;
+}
+
+.resource-title{
+  padding-left: 1em;
+  text-transform: uppercase;
+  background-color: rgb(8, 5, 148);
+  color: rgb(9, 247, 255);
+  text-shadow: 2px 2px 5px navy;
+  text-align: left;
+  padding-bottom: 0px;
+}
+.resource-description{
+  text-align:left;
+  color: navy ;
+  padding: .7cm;
+}
+.resource-post-date{
+  text-align: right;
+  color: rgb(9, 125, 179) ;
+
+}
+.resource-type{
+  width:fit-content;
+  text-align: left;
+  margin: 1em;
+  color: navy ;
+  background-color: rgb(9, 247, 255);
+}
+
+.resource-tag{
+  text-align: left;
+  margin: 1em;
+  width:fit-content;
+  background-color: rgb(9, 247, 255);
+}
+
+.full-view-btn{
+  margin-right: 51em;
+  text-transform: uppercase;
+  background-color: rgb(8, 5, 148);
+  color: rgb(9, 247, 255);
+  text-shadow: 2px 2px 5px rgb(245, 245, 252);
+}
+
+.add-studyList-btn{
+  margin-left: 40em;
+  margin-right: 2em;
+  margin-bottom: 1em;
+  text-transform: uppercase;
+  background-color: rgb(8, 5, 148);
+  color: rgb(9, 247, 255);
+  text-shadow: 2px 2px 5px rgb(245, 245, 252);
+}
+.rm-studyList-btn{
+  margin-left: 40em;
+  margin-right: 2em;
+  margin-bottom: 1em;
+  text-transform: uppercase;
+  background-color: rgb(8, 5, 148);
+  color: rgb(9, 247, 255);
+  text-shadow: 2px 2px 5px rgb(245, 245, 252);
+}
+
+.submit-btn{
+
+  text-transform: uppercase;
+  background-color: rgb(9, 247, 255);
+  color:  rgb(5, 126, 148);
+  text-shadow: 2px 2px 5px rgb(245, 245, 252);
+}
+
+.comments-btn{
+
+  text-transform: uppercase;
+  background-color: rgb(8, 5, 148);
+  color: rgb(9, 247, 255);
+  text-shadow: 2px 2px 5px rgb(245, 245, 252);
 }
