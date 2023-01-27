@@ -7,7 +7,6 @@ import {
   IResourceData,
   IStudyListData,
   IUserData,
-  ITypes,
 } from "../utils/interfaces";
 import Resource from "./Resource";
 import { Link } from "react-router-dom";

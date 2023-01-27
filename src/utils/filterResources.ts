@@ -1,4 +1,4 @@
-import { IResourceData, ITypes } from "./interfaces";
+import { IResourceData } from "./interfaces";
 
 //selectedTypesArr = an array that only contains the names of types who's values were set to true
 export const filterResources = (
