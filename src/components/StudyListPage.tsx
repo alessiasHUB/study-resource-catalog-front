@@ -13,7 +13,7 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
     []
   );
   const [isFullView, setIsFullView] = useState<boolean>(false);
-  const { signedInUser, studyListArr } = props;
+  const { signedInUser } = props;
 
   async function getStudyListResources(userID: number) {
     const response = await axios.get(`${url}/study_resources/${userID}`);
@@ -23,8 +23,7 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
 
   useEffect(() => {
     getStudyListResources(signedInUser.id);
-    console.log("useEffect is running");
-  }, []);
+  }, [signedInUser.id]);
 
   const handleFullViewClicked = () => {
     setIsFullView((prev) => !prev);
