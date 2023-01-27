@@ -22,7 +22,7 @@ interface CatalogPageProps {
   allUsers: IUserData[];
   studyListArr: IStudyListData[];
 }
-
+//not for push
 function CatalogPage({
   signedInUser,
   allUsers,
@@ -100,7 +100,7 @@ function CatalogPage({
           <h3> FILTER BY TYPE...</h3>
           {typesArr.map((type) => {
             return (
-              <div key={type}>
+              <div key={type} className="nav-box">
                 <input
                   type="checkbox"
                   id="checkbox"
@@ -137,11 +137,11 @@ function CatalogPage({
           </Link>
         )}
 
-        <div className="ctn-resource-usage-key">
+        {/* <div className="ctn-resource-usage-key">
           <p> Used and recommended = 🌟</p>
           <p> Not used but recommended = 🔎</p>
           <p>Not recommended = 💩</p>
-        </div>
+        </div> */}
         {signedInUser && (
           <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>
         )}
@@ -166,7 +166,6 @@ function CatalogPage({
             );
           })}
       </div>
-      <div></div>
     </>
   );
 }

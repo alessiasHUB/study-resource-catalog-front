@@ -14,27 +14,46 @@
 }
 
 .ctn-catalog-page-left {
-  position: sticky;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 280px;
-  height: 800px;
-  display: inline-flexbox;
+  z-index: 1;
+  width: 18.5em;
+  height: auto;
+  border: 5px solid purple;
+  margin-right: auto;
 }
-ctn-catalog-page-left {
-  display: inline-flexbox;
+/* ------------RIGHT SIDE  */
+.ctn-catalog-page-right {
+  position: absolute;
+  display: sticky;
+  float: right;
+  border: 0.3em solid blue;
+  left: 20em;
 }
-.ctn-resource-usage-key {
-  border: solid 5px rgb(192, 255, 197);
+.ctn-filter-by-type {
+  border: 5px solid pink;
+}
+.ctn-filter-by-tags {
+  border: 5px solid red;
 }
 
 /*
 -------RESOURCE--------
 */
 .ctn-resource {
+  width: 50em;
   border-radius: 5px;
   border-width: 2px;
-  border-style: solid;
+  border: solid rgb(20, 11, 93);
   background-color: rgb(119, 151, 179);
-  margin: 5px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+  margin-left: 0em;
+}
+.ctn-resource-usage-key {
+  border: solid 5px rgb(192, 255, 197);
+  top: 100px;
+  left: 500px;
 }
