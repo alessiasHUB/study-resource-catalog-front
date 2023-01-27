@@ -22,7 +22,7 @@ interface CatalogPageProps {
   allUsers: IUserData[];
   studyListArr: IStudyListData[];
 }
-
+//not for push
 function CatalogPage({
   signedInUser,
   allUsers,
