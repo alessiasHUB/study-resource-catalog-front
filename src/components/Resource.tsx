@@ -270,7 +270,7 @@ function Resource({
           </div>
         )}
       <button className="full-view-btn" onClick={handleFullViewClicked}>
-        {isFullView ? "See less":"Full View"}
+        {isFullView ? "See less" : "Full View"}
       </button>
       <button onClick={() => handleTopLvCommentBtn(resourceData.id)}>
         👀 Comments
