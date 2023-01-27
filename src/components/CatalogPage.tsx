@@ -63,7 +63,7 @@ function CatalogPage({
     }
   };
 
-  console.log("SELECTED TYPES", selectedTypesArr)
+  console.log("SELECTED TYPES", selectedTypesArr);
 
   const handleCheckedTagsBox = (tag: string) => {
     if (selectedTagsArr.includes(tag)) {
