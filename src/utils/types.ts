@@ -1,40 +1,16 @@
-import { ITypes } from "./interfaces";
-
-//hey TS! WE only want to deal with resourceTypes
-export type ResourceType = keyof ITypes;
-
-// export const typesArr: ResourceType[] = [
-//   "video",
-//   "article",
-//   "eBook",
-//   "podcast",
-//   "exercise",
-//   "exercise set",
-//   "software tool",
-//   "course",
-//   "diagram",
-//   "cheat-sheet",
-//   "reference",
-//   "resource list",
-//   "youtube channel",
-//   "organisation",
-// ];
-
-export const typesArr: ResourceType[] = [
+export const typesArr: string[] = [
   "video",
   "article",
   "eBook",
   "podcast",
   "exercise",
-  "exercise_set",
-  "software_tool",
+  "exercise set",
+  "software tool",
   "course",
   "diagram",
-  "cheat_sheet",
+  "cheat-sheet",
   "reference",
-  "resource_list",
-  "youtube_channel",
+  "resource list",
+  "youtube channel",
   "organisation",
 ];
-
-//Add presentable ResourceType
