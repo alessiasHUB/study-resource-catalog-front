@@ -13,6 +13,7 @@ import Comment from "./Comment";
 import findResourceInLikes from "../utils/find-resource-in-likes";
 import checkForResourceInStudyList from "../utils/is-res-in-study-list";
 import "./CatalogPage.css";
+import dateFormatting from "../utils/date-format";
 
 interface ResourceProps {
   resourceData: IResourceData;
@@ -157,7 +158,9 @@ function Resource({
   return (
     <div className="ctn-resource">
       <p className="resource-title">{resourceData.title}</p>
-      <p className="resource-post-date">{String(resourceData.post_date)}</p>
+      <p className="resource-post-date">
+        Posted: {dateFormatting(resourceData.post_date)}
+      </p>
       <p
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
