@@ -56,7 +56,9 @@
 
 /*-------RESOURCE--------*/
 .ctn-resource {
-  width: 50em;
+  /* width: 50em; */
+  width: 100%;
+  height: 300px;
   border-radius: 5px;
   border-width: 2px;
   color: navy;
@@ -103,7 +105,10 @@
   text-align: left;
   margin: 1em;
   width: fit-content;
-  background-color: rgb(9, 247, 255);
+  background-color: rgb(28, 34, 34);
+  padding: 3px;
+  border-radius: 3px;
+  color: white;
 }
 
 .full-view-btn {
@@ -111,17 +116,18 @@
   text-transform: uppercase;
   background-color: rgb(8, 5, 148);
   color: rgb(9, 247, 255);
-  text-shadow: 2px 2px 5px rgb(245, 245, 252);
+  /* text-shadow: 2px 2px 5px rgb(245, 245, 252); */
 }
 
 .add-studyList-btn {
-  margin-left: 40em;
+  margin: 0px 2em 1em 40em;
+  /* margin-left: 40em;
   margin-right: 2em;
-  margin-bottom: 1em;
+  margin-bottom: 1em; */
   text-transform: uppercase;
   background-color: rgb(8, 5, 148);
   color: rgb(9, 247, 255);
-  text-shadow: 2px 2px 5px rgb(245, 245, 252);
+  /* text-shadow: 2px 2px 5px rgb(245, 245, 252); */
 }
 .rm-studyList-btn {
   margin-left: 40em;
@@ -130,19 +136,24 @@
   text-transform: uppercase;
   background-color: rgb(8, 5, 148);
   color: rgb(9, 247, 255);
-  text-shadow: 2px 2px 5px rgb(245, 245, 252);
+  /* text-shadow: 2px 2px 5px rgb(245, 245, 252); */
 }
 
 .submit-btn {
   text-transform: uppercase;
   background-color: rgb(9, 247, 255);
   color: rgb(5, 126, 148);
-  text-shadow: 2px 2px 5px rgb(245, 245, 252);
+  /* text-shadow: 2px 2px 5px rgb(245, 245, 252); */
 }
 
 .comments-btn {
   text-transform: uppercase;
   background-color: rgb(8, 5, 148);
   color: rgb(9, 247, 255);
-  text-shadow: 2px 2px 5px rgb(245, 245, 252);
+  /* text-shadow: 2px 2px 5px rgb(245, 245, 252); */
+}
+.resource-link-btn {
+  background-color: white;
+  padding: 3px;
+  border-radius: 3px;
 }

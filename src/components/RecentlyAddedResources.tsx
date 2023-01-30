@@ -10,7 +10,7 @@ export default function RecentlyAddedResources(
 ): JSX.Element {
   return (
     <>
-      <p>Recently added resources</p>
+      <h2>Recently added resources</h2>
       <div className="top-res-container">
         {props.recAddRes.map((el) => (
           <button key={el.id} className="top-res">

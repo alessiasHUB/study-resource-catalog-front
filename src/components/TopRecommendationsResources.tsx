@@ -9,7 +9,7 @@ export default function TopRecommendedResources(
 ): JSX.Element {
   return (
     <>
-      <p>Recommended resources</p>
+      <h2>Recommended resources</h2>
       <div className="top-res-container">
         {props.recommendedRes.map((el) => (
           <button key={el.id} className="top-res">
