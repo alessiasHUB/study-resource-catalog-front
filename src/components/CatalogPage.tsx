@@ -85,7 +85,7 @@ function CatalogPage({
         ></input>
 
         <div className="ctn-filter-by-type">
-          <h3> FILTER BY TYPE...</h3>
+          <h3 className="type-title"> FILTER BY TYPE...</h3>
           {typesArr.map((type) => {
             return (
               <div key={type} className="nav-box">
@@ -101,7 +101,7 @@ function CatalogPage({
           })}
         </div>
         <div className="ctn-filter-by-tags">
-          <h3> FILTER BY TAG...</h3>
+          <h3 className="tag-title"> FILTER BY TAG...</h3>
           {tagsArr.map((tag) => {
             return (
               <div key={tag}>
@@ -111,7 +111,7 @@ function CatalogPage({
                   value={tag}
                   onChange={() => handleCheckedTagsBox(tag)}
                 />
-                <label htmlFor="checkbox">{tag}</label>
+                <label htmlFor="checkbox"> {tag}</label>
               </div>
             );
           })}

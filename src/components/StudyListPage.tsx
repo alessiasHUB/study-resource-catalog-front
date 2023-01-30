@@ -5,7 +5,6 @@ import { url } from "../utils/url";
 
 interface StudyListProps {
   signedInUser: IUserData;
-  studyListArr: IStudyListData[];
 }
 
 export default function StudyListPage(props: StudyListProps): JSX.Element {
@@ -23,7 +22,9 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
 
   useEffect(() => {
     getStudyListResources(signedInUser.id);
-  }, [signedInUser.id]);
+    console.log("useEffect is running");
+  }, [signedInUser]);
+
 
   const handleFullViewClicked = () => {
     setIsFullView((prev) => !prev);
