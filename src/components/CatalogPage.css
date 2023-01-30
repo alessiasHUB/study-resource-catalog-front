@@ -103,7 +103,7 @@
 
 .resource-tag {
   text-align: left;
-  margin: 1em;
+  margin: .5em;
   width: fit-content;
   background-color: rgb(28, 34, 34);
   padding: 3px;
@@ -149,6 +149,7 @@
 .comments-btn {
   text-transform: uppercase;
   background-color: rgb(8, 5, 148);
+  margin-bottom: .5em;
   color: rgb(9, 247, 255);
   /* text-shadow: 2px 2px 5px rgb(245, 245, 252); */
 }

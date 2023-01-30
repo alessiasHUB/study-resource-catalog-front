@@ -131,7 +131,7 @@ function CatalogPage({
           <p>Not recommended = 💩</p>
         </div> */}
         {signedInUser && (
-          <Link to="/add_resource"> ADD RESOURCE YOU PLEB </Link>
+          <Link to="/add_resource">  </Link>
         )}
         {resources.length > 0 &&
           filterResources(
