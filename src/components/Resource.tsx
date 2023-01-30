@@ -272,7 +272,10 @@ function Resource({
       <button className="full-view-btn" onClick={handleFullViewClicked}>
         Full View
       </button>
-      <button className="comments-btn" onClick={() => handleTopLvCommentBtn(resourceData.id)}>
+      <button
+        className="comments-btn"
+        onClick={() => handleTopLvCommentBtn(resourceData.id)}
+      >
         👀 Comments
       </button>
       {comments && (
@@ -283,7 +286,10 @@ function Resource({
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
               />
-              <button className="submit-btn" onClick={() => handleSubmitNewComment(newComment)}>
+              <button
+                className="submit-btn"
+                onClick={() => handleSubmitNewComment(newComment)}
+              >
                 Submit Comment
               </button>
             </div>
@@ -300,11 +306,15 @@ function Resource({
       )}
       {signedInUser &&
         !checkForResourceInStudyList(resourceData.id, studyListArr) && (
-          <button className="add-studyList-btn" onClick={postToStudyList}>➕ Add to study-list</button>
+          <button className="add-studyList-btn" onClick={postToStudyList}>
+            ➕ Add to study-list
+          </button>
         )}{" "}
       {signedInUser &&
         checkForResourceInStudyList(resourceData.id, studyListArr) && (
-          <button className="rm-studyList-btn" onClick={deleteFromStudyList}>Remove from study-list</button>
+          <button className="rm-studyList-btn" onClick={deleteFromStudyList}>
+            Remove from study-list
+          </button>
         )}
     </div>
   );
