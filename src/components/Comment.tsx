@@ -11,10 +11,12 @@ interface CommentProps {
 export default function Comment(props: CommentProps): JSX.Element {
   const { allUsers, comment } = props;
   return (
-    <>
-      <p>{findUsernameFromID(comment.id, allUsers)}</p>
-      <p>{String(comment.post_date)}</p>
-      <p>{comment.text}</p>
-    </>
+    <div className="comment-ctn">
+      <p className="comment-user">
+        User: {findUsernameFromID(comment.id, allUsers)}
+      </p>
+      <p className="comment-date">{String(comment.post_date)}</p>
+      <p className="comment-text">{comment.text}</p>
+    </div>
   );
 }
