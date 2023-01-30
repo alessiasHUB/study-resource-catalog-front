@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IUserData } from "../utils/interfaces";
-import "./navbar.css";
+
 interface SignInProps {
   userData: IUserData[];
   setSignedInUser: React.Dispatch<React.SetStateAction<IUserData | undefined>>;
@@ -30,24 +30,21 @@ function SignInPage(props: SignInProps): JSX.Element {
   }
 
   return (
-    <>
-      <div className="sign-in-page">
-        <> Sign-In Page </>
-        <select onChange={(e) => setSelectedUser(e.target.value)}>
-          {props.userData.map((userData) => {
-            return (
-              <option key={userData.id} value={userData.username}>
-                {userData.username}
-              </option>
-            );
-          })}
-        </select>
-        <button className="sign-in-btn" onClick={handleSignIn}>
-          {" "}
-          SIGN IN{" "}
-        </button>
-      </div>
-    </>
+    <div className="content">
+      <> Sign-In Page </>
+      <select onChange={(e) => setSelectedUser(e.target.value)}>
+        {props.userData.map((userData) => {
+          return (
+            <option key={userData.id} value={userData.username}>
+              {userData.username}
+            </option>
+          );
+        })}
+      </select>
+      <button className="sign-in-btn" onClick={handleSignIn}>
+        SIGN IN
+      </button>
+    </div>
   );
 }
 

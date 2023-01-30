@@ -6,6 +6,9 @@ body {
   background-color: rgb(215, 249, 250);
 }
 
+.content {
+  padding: 70px 0px 0px 0px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

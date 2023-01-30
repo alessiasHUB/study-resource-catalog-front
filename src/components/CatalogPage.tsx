@@ -75,7 +75,7 @@ function CatalogPage({
   };
 
   return (
-    <>
+    <div className="content">
       <div className="ctn-catalog-page-left">
         <input
           className="catalog-search-input"
@@ -154,7 +154,7 @@ function CatalogPage({
             );
           })}
       </div>
-    </>
+    </div>
   );
 }
 

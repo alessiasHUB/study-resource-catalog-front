@@ -32,7 +32,7 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
   console.log(studyListResources);
 
   return (
-    <>
+    <div className="content">
       {studyListResources.map((resource: IResourceData) => {
         return (
           <div key={resource.id}>
@@ -81,7 +81,7 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
 

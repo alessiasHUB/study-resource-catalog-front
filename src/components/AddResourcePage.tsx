@@ -67,7 +67,7 @@ export default function AddResourcePage({
   // }
 
   return (
-    <>
+    <div className="content">
       <h1>Add new resource</h1>
       <form onSubmit={handleSubmitResource}>
         <input placeholder="title" type="text" id="title" required />
@@ -117,6 +117,6 @@ export default function AddResourcePage({
           <button type="submit">SUBMIT</button>
         )}
       </form>
-    </>
+    </div>
   );
 }

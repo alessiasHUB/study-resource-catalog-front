@@ -10,21 +10,23 @@ export default function TopRecommendedResources(
   return (
     <>
       <p>Recommended resources</p>
-      {props.recommendedRes.map((el) => (
-        <button key={el.id} className="recent-res">
-          <h4>{el.title}</h4>
-          <p>
-            <a href={el.link}>🔗link</a>
-          </p>
-          <p>type: {el.type}</p>
-
-          {el.tags.map((el, i) => (
-            <span key={i}>{el}</span>
-          ))}
-
-          <p>{el.likes}👍</p>
-        </button>
-      ))}
+      <div className="top-res-container">
+        {props.recommendedRes.map((el) => (
+          <button key={el.id} className="top-res">
+            <h4 className="top-res-title">{el.title}</h4>
+            <p>
+              <a href={el.link}>🔗link</a>
+            </p>
+            <p className="top-res-type">type: {el.type}</p>
+            {el.tags.map((el, i) => (
+              <span className="top-res-tag" key={i}>
+                {el}
+              </span>
+            ))}
+            <p>{el.likes}👍</p>
+          </button>
+        ))}
+      </div>
     </>
   );
 }

@@ -19,10 +19,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
   width: 18.5em;
   height: auto;
   margin-right: auto;
+  margin-top: 100px;
 }
 /* ------------RIGHT SIDE  */
 .ctn-catalog-page-right {
@@ -54,9 +54,7 @@
   margin: 0.2cm;
 }
 
-/*
--------RESOURCE--------
-*/
+/*-------RESOURCE--------*/
 .ctn-resource {
   width: 50em;
   border-radius: 5px;
