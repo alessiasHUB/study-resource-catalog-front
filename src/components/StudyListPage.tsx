@@ -25,6 +25,7 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
     console.log("useEffect is running");
   }, [signedInUser]);
 
+
   const handleFullViewClicked = () => {
     setIsFullView((prev) => !prev);
   };

@@ -17,6 +17,11 @@ body {
   }
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -30,11 +35,6 @@ body {
 
 .App-link {
   color: #61dafb;
-}
-
-.ctn-nav {
-  color: rgb(7, 119, 104);
-  border: solid rgb(7, 119, 104) 10px;
 }
 
 @keyframes App-logo-spin {

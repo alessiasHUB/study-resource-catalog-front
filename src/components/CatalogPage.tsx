@@ -7,12 +7,11 @@ import {
   IResourceData,
   IStudyListData,
   IUserData,
-  ITypes,
 } from "../utils/interfaces";
 import Resource from "./Resource";
 import { Link } from "react-router-dom";
 import { tagsArr } from "../utils/tags";
-import { ResourceType, typesArr } from "../utils/types";
+import { typesArr } from "../utils/types";
 
 import "./CatalogPage.css";
 import { filterResources } from "../utils/filterResources";
@@ -22,7 +21,7 @@ interface CatalogPageProps {
   allUsers: IUserData[];
   studyListArr: IStudyListData[];
 }
-//not for push
+
 function CatalogPage({
   signedInUser,
   allUsers,
@@ -31,22 +30,7 @@ function CatalogPage({
   const [resources, setResources] = useState<IResourceData[]>([]);
   const [userLikes, setUserLikes] = useState<ILikesData[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
-  const [selectedTypesObj, setSelectedTypesObj] = useState<ITypes>({
-    video: false,
-    article: false,
-    eBook: false,
-    podcast: false,
-    exercise: false,
-    exercise_set: false,
-    software_tool: false,
-    course: false,
-    diagram: false,
-    cheat_sheet: false,
-    reference: false,
-    resource_list: false,
-    youtube_channel: false,
-    organisation: false,
-  });
+  const [selectedTypesArr, setSelectedTypesArr] = useState<string[]>([]);
   const [selectedTagsArr, setSelectedTagsArr] = useState<string[]>([]);
   //---------------------------------------------------------------Code body
   const fetchAndStoreResources = useCallback(async () => {
@@ -68,13 +52,17 @@ function CatalogPage({
     getSignedInUserLikes();
   }, [fetchAndStoreResources, getSignedInUserLikes]);
 
-  const handleCheckedTypeBox = (resourcetype: ResourceType) => {
-    setSelectedTypesObj((prev) => {
-      //return an update of setSelectedTypesObj where the key (type) in question is switched from true --> false (or vice versa)
-      // take the obj that denotes which types have been selected and update another key value pair where the key is the resourceType and the valu
-      return { ...prev, [resourcetype]: !prev[resourcetype] };
-    });
+  const handleCheckedTypeBox = (resourceType: string) => {
+    if (selectedTypesArr.includes(resourceType)) {
+      setSelectedTypesArr(selectedTypesArr.filter((el) => el !== resourceType));
+    } else {
+      setSelectedTypesArr((prev) => {
+        return [...prev, resourceType];
+      });
+    }
   };
+
+  console.log("SELECTED TYPES", selectedTypesArr);
 
   const handleCheckedTagsBox = (tag: string) => {
     if (selectedTagsArr.includes(tag)) {
@@ -148,7 +136,7 @@ function CatalogPage({
         {resources.length > 0 &&
           filterResources(
             searchInput,
-            selectedTypesObj,
+            selectedTypesArr,
             selectedTagsArr,
             resources
           ).map((resource) => {
