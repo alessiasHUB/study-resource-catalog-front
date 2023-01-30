@@ -181,13 +181,11 @@ function Resource({
       {isFullView ? (
         <>
           <h5 className="resource-description">{resourceData.description}</h5>
-          {resourceData.tags.map((tag) => {
-            return (
-              <div className="resource-tag" key={tag}>
-                {tag}
-              </div>
-            );
-          })}
+          {resourceData.tags.map((tag) => (
+            <span className="resource-tag" key={tag}>
+              {tag}
+            </span>
+          ))}
         </>
       ) : (
         // ---------------------------------if isFullView is false - render reduced description and 3 tags
@@ -197,19 +195,17 @@ function Resource({
           </p>
           {resourceData.tags
             .filter((el, index) => index < 3)
-            .map((tag) => {
-              return (
-                <div className="resource-tag" key={tag}>
-                  {tag}
-                </div>
-              );
-            })}
+            .map((tag) => (
+              <span className="resource-tag" key={tag}>
+                {tag}
+              </span>
+            ))}
         </>
       )}
       {/* -------------------------------------end of conditional rendering for isFullView*/}
-      <div className="resource-link-btn">
-        <a href={resourceData.link}>Check it out</a>
-      </div>
+      <a className="resource-link-btn" href={resourceData.link}>
+        🔗Link to resource
+      </a>
       {signedInUser !== undefined &&
         !findResourceInLikes(resourceData.id, userLikes) && (
           <div>
@@ -309,7 +305,7 @@ function Resource({
           <button className="add-studyList-btn" onClick={postToStudyList}>
             ➕ Add to study-list
           </button>
-        )}{" "}
+        )}
       {signedInUser &&
         checkForResourceInStudyList(resourceData.id, studyListArr) && (
           <button className="rm-studyList-btn" onClick={deleteFromStudyList}>
