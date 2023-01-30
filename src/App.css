@@ -50,3 +50,37 @@ a {
 }
 
 /* //update for thurs */
+
+.add-res-desc {
+  width: 430px;
+  height: 300px;
+  margin: 1px;
+}
+.add-res-title {
+  width: 428px;
+}
+.add-res-link {
+  width: 428px;
+  margin: 3px;
+}
+.add-res-tags {
+  margin: 1px;
+}
+.add-res-types {
+  margin: 1px;
+}
+.add-res-usage {
+  margin: 1px;
+}
+.add-res-submit-btn {
+  background-color: black;
+  font-size: 16px;
+  color: white;
+  border-radius: 3px;
+  border-style: none;
+  padding: 5px;
+  margin: 4px 0px 0px 0px;
+}
+.add-res-submit-btn:hover {
+  background-color: rgb(13, 24, 80);
+}

@@ -6,6 +6,8 @@ import { url } from "../utils/url";
 import { IUserData, INewResourceData } from "../utils/interfaces";
 import axios from "axios";
 
+// todo: have the input fields cleared when submit
+
 interface AddResourcePageProps {
   signedInUser: IUserData | undefined;
 }
@@ -70,51 +72,64 @@ export default function AddResourcePage({
     <div className="content">
       <h1>Add new resource</h1>
       <form onSubmit={handleSubmitResource}>
-        <input placeholder="title" type="text" id="title" required />
-        <input
-          placeholder="link"
-          type="text"
-          id="link"
+        <div>
+          <input
+            className="add-res-title"
+            placeholder="Title"
+            type="text"
+            id="title"
+            required
+          />
+          <br />
+          <input
+            className="add-res-link"
+            placeholder="Link"
+            type="text"
+            id="link"
+            required
+            onChange={async (e) =>
+              setLink(await getMatchingResource(e.target.value))
+            }
+          />
+          {link && <p>This resource is already in the database!</p>}
+        </div>
+        <textarea
+          className="add-res-desc"
+          placeholder="Description..."
+          id="description"
           required
-          onChange={async (e) =>
-            setLink(await getMatchingResource(e.target.value))
-          }
         />
-        {link && <p>This resource is already in the database!</p>}
-        <textarea placeholder="description" id="description" required />
-        {/* {tagsArr.map((el, i) => ( ------------------------------------------replaced by select tags below :(
-          <button key={i} onClick={() => setTags([...tags])}>
-            {el}
-          </button>
-        ))} */}
-        <select id="tags">
-          {tagsArr.map((el, index) => (
-            <option value={el} key={index}>
-              {el}
-            </option>
-          ))}
-        </select>
-        <select id="type">
-          {typesArr.map((el, index) => (
-            <option value={el} key={index}>
-              {el}
-            </option>
-          ))}
-        </select>
-        <select id="usage">
-          {usageArr.map((el, index) => (
-            <option value={el} key={index}>
-              {el}
-            </option>
-          ))}
-        </select>
-
+        <div>
+          <select className="add-res-tags" id="tags">
+            {tagsArr.map((el, index) => (
+              <option value={el} key={index}>
+                {el}
+              </option>
+            ))}
+          </select>
+          <select className="add-res-types" id="type">
+            {typesArr.map((el, index) => (
+              <option value={el} key={index}>
+                {el}
+              </option>
+            ))}
+          </select>
+          <select className="add-res-usage" id="usage">
+            {usageArr.map((el, index) => (
+              <option value={el} key={index}>
+                {el}
+              </option>
+            ))}
+          </select>
+        </div>
         {link ? (
-          <button type="submit" disabled>
+          <button className="add-res-submit-btn" type="submit" disabled>
             SUBMIT
           </button>
         ) : (
-          <button type="submit">SUBMIT</button>
+          <button className="add-res-submit-btn" type="submit">
+            SUBMIT
+          </button>
         )}
       </form>
     </div>
