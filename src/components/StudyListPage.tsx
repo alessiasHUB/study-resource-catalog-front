@@ -5,7 +5,6 @@ import { url } from "../utils/url";
 
 interface StudyListProps {
   signedInUser: IUserData;
-  studyListArr: IStudyListData[];
 }
 
 export default function StudyListPage(props: StudyListProps): JSX.Element {
@@ -13,7 +12,7 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
     []
   );
   const [isFullView, setIsFullView] = useState<boolean>(false);
-  const { signedInUser, studyListArr } = props;
+  const { signedInUser } = props;
 
   async function getStudyListResources(userID: number) {
     const response = await axios.get(`${url}/study_resources/${userID}`);
