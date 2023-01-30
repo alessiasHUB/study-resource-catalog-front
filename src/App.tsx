@@ -67,12 +67,7 @@ function App() {
         {signedInUser && (
           <Route
             path="/study_list"
-            element={
-              <StudyListPage
-                signedInUser={signedInUser}
-                studyListArr={studyListArr}
-              />
-            }
+            element={<StudyListPage signedInUser={signedInUser} />}
           />
         )}
         <Route

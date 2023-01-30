@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { IResourceData, IStudyListData, IUserData } from "../utils/interfaces";
+import { IResourceData, IUserData } from "../utils/interfaces";
 import { url } from "../utils/url";
 
 interface StudyListProps {
@@ -24,7 +24,6 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
     getStudyListResources(signedInUser.id);
     console.log("useEffect is running");
   }, [signedInUser]);
-
 
   const handleFullViewClicked = () => {
     setIsFullView((prev) => !prev);
