@@ -39,9 +39,9 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
               <p className="resource-description">{resource.description}</p>
               {resource.tags.map((tag) => {
                 return (
-                  <div className="resource-tag" key={tag}>
+                  <span className="resource-tag" key={tag}>
                     {tag}
-                  </div>
+                  </span>
                 );
               })}
             </>

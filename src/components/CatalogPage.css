@@ -63,7 +63,7 @@ ul {
 .ctn-resource {
   /* width: 50em; */
   width: 100%;
-  min-height: 300px;
+  min-height: 100px;
   border-radius: 5px;
   border-width: 2px;
   color: navy;
