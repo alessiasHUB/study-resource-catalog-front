@@ -254,12 +254,26 @@ function Resource({
             </button>
           </div>
         )}
+        <div>
       <button
         className="comments-btn"
         onClick={() => handleTopLvCommentBtn(resourceData.id)}
       >
         👀 Comments
       </button>
+      {signedInUser &&
+        !checkForResourceInStudyList(resourceData.id, studyListArr) && (
+          <button className="add-studyList-btn" onClick={postToStudyList}>
+            ➕ Add to study-list
+          </button>
+        )}
+      {signedInUser &&
+        checkForResourceInStudyList(resourceData.id, studyListArr) && (
+          <button className="rm-studyList-btn" onClick={deleteFromStudyList}>
+            Remove from study-list
+          </button>
+        )}
+        </div>
       {comments && isCommentsClicked && (
         <div className="ctn-resource-comments">
           {signedInUser && (
@@ -286,18 +300,6 @@ function Resource({
           </div>
         </div>
       )}
-      {signedInUser &&
-        !checkForResourceInStudyList(resourceData.id, studyListArr) && (
-          <button className="add-studyList-btn" onClick={postToStudyList}>
-            ➕ Add to study-list
-          </button>
-        )}
-      {signedInUser &&
-        checkForResourceInStudyList(resourceData.id, studyListArr) && (
-          <button className="rm-studyList-btn" onClick={deleteFromStudyList}>
-            Remove from study-list
-          </button>
-        )}
     </div>
   );
 }
