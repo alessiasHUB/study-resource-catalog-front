@@ -1,6 +1,11 @@
 /*
 -------CATALOG_PAGE--------
 */
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
 .add-resource-btn {
   border: 2px solid blue;
   border-radius: 20px;
@@ -58,7 +63,7 @@
 .ctn-resource {
   /* width: 50em; */
   width: 100%;
-  height: 300px;
+  min-height: 300px;
   border-radius: 5px;
   border-width: 2px;
   color: navy;
@@ -162,4 +167,23 @@
   color: aliceblue;
   padding: 3px;
   border-radius: 3px;
+}
+
+/*
+Comments
+*/
+.ctn-resource-comments {
+  border: solid rgba(0, 0, 0, 0.377) 2px;
+  border-radius: 10px;
+  padding: 10px;
+  width: fit-content;
+  margin: auto;
+}
+
+.comment-ctn {
+  border-top: solid rgba(0, 0, 0, 0.377) 2px;
+}
+
+.comment-user {
+  font-size: 0.8rem;
 }
