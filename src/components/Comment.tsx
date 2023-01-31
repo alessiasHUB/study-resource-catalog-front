@@ -14,7 +14,10 @@ export default function Comment(props: CommentProps): JSX.Element {
   return (
     <div className="comment-ctn">
       <p className="comment-user">
-       <i>{findUsernameFromID(comment.id, allUsers)} - {dateFormatting(comment.post_date)}</i>
+        <i>
+          {findUsernameFromID(comment.id, allUsers)} -{" "}
+          {dateFormatting(comment.post_date)}
+        </i>
       </p>
       <p className="comment-text">{comment.text}</p>
     </div>
