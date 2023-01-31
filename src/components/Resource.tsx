@@ -182,15 +182,19 @@ function Resource({
       <h4 className="resource-type">{resourceData.type}</h4>
       <>
         <h5 className="resource-description">{resourceData.description}</h5>
-        {resourceData.tags.map((tag) => (
-          <span className="resource-tag" key={tag}>
-            {tag}
-          </span>
-        ))}
+        <div className="ctn-resource-tags">
+          {resourceData.tags.map((tag) => (
+            <span className="resource-tag" key={tag}>
+              {tag}
+            </span>
+          ))}
+        </div>
       </>
+
       <a className="resource-link-btn" href={resourceData.link}>
         🔗Link to resource
       </a>
+
       {signedInUser !== undefined &&
         !findResourceInLikes(resourceData.id, userLikes) && (
           <div>
@@ -250,12 +254,26 @@ function Resource({
             </button>
           </div>
         )}
-      <button
-        className="comments-btn"
-        onClick={() => handleTopLvCommentBtn(resourceData.id)}
-      >
-        👀 Comments
-      </button>
+      <div>
+        <button
+          className="comments-btn"
+          onClick={() => handleTopLvCommentBtn(resourceData.id)}
+        >
+          👀 Comments
+        </button>
+        {signedInUser &&
+          !checkForResourceInStudyList(resourceData.id, studyListArr) && (
+            <button className="add-studyList-btn" onClick={postToStudyList}>
+              ➕ Add to study-list
+            </button>
+          )}
+        {signedInUser &&
+          checkForResourceInStudyList(resourceData.id, studyListArr) && (
+            <button className="rm-studyList-btn" onClick={deleteFromStudyList}>
+              Remove from study-list
+            </button>
+          )}
+      </div>
       {comments && isCommentsClicked && (
         <div className="ctn-resource-comments">
           {signedInUser && (
@@ -282,18 +300,6 @@ function Resource({
           </div>
         </div>
       )}
-      {signedInUser &&
-        !checkForResourceInStudyList(resourceData.id, studyListArr) && (
-          <button className="add-studyList-btn" onClick={postToStudyList}>
-            ➕ Add to study-list
-          </button>
-        )}
-      {signedInUser &&
-        checkForResourceInStudyList(resourceData.id, studyListArr) && (
-          <button className="rm-studyList-btn" onClick={deleteFromStudyList}>
-            Remove from study-list
-          </button>
-        )}
     </div>
   );
 }
