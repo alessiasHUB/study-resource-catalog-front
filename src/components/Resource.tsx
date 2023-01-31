@@ -38,10 +38,12 @@ function Resource({
   const [comments, setComments] = useState<ICommentData[]>();
   const [newComment, setNewComment] = useState<string>("");
   const [isHovered, setIsHovered] = useState(false);
+  const [isCommentsClicked, setIsCommentsClicked] = useState<boolean>(false)
 
   //-----------------------------------get comments
   const handleTopLvCommentBtn = (id: number) => {
     getResourceComments(id);
+    setIsCommentsClicked(prev => !prev)
   };
   const getResourceComments = async (id: number) => {
     const response = await axios.get(`${url}/comments/${id}`);
@@ -280,7 +282,7 @@ function Resource({
       >
         👀 Comments
       </button>
-      {comments && (
+      {comments && isCommentsClicked && (
         <div className="ctn-resource-comments">
           {signedInUser && (
             <div>
