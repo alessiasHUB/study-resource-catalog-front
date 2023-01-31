@@ -15,8 +15,5 @@ const testArrOne = [
 
 test("username from id", () => {
   expect(findUsernameFromID(1, testArrOne)).toBe("DidWazHere");
-});
-
-test("username from id", () => {
   expect(findUsernameFromID(6, testArrOne)).toBe(undefined);
 });
