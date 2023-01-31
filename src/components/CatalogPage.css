@@ -68,11 +68,15 @@
   margin-right: 0.5em;
   margin-left: 0em;
   font-family: "Courier New", Courier, monospace;
+  position: relative;
 }
 .ctn-resource-usage-key {
-  border: solid 5px rgb(192, 255, 197);
-  top: 100px;
-  left: 500px;
+  border: solid 2px rgb(192, 255, 197);
+  background-color: aliceblue;
+  top: 110px;
+  left: 415px;
+  position: absolute;
+  z-index: 1;
 }
 
 .resource-title {
