@@ -125,11 +125,6 @@ function CatalogPage({
           </Link>
         )}
 
-        {/* <div className="ctn-resource-usage-key">
-          <p> Used and recommended = 🌟</p>
-          <p> Not used but recommended = 🔎</p>
-          <p>Not recommended = 💩</p>
-        </div> */}
         {signedInUser && <Link to="/add_resource"> </Link>}
         {resources.length > 0 &&
           filterResources(

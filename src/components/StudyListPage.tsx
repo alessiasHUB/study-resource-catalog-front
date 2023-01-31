@@ -25,10 +25,6 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
     console.log("useEffect is running");
   }, [signedInUser]);
 
-  const handleFullViewClicked = () => {
-    setIsFullView((prev) => !prev);
-  };
-
   console.log(studyListResources);
 
   return (
@@ -73,10 +69,6 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
               <div className="resource-link-btn">
                 <a href={resource.link}>Check it out</a>
               </div>
-              <button className="full-view-btn" onClick={handleFullViewClicked}>
-                {" "}
-                Full View{" "}
-              </button>
             </div>
           </div>
         );

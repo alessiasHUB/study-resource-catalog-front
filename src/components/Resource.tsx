@@ -34,7 +34,6 @@ function Resource({
   userLikes,
   studyListArr,
 }: ResourceProps): JSX.Element {
-  const [isFullView, setIsFullView] = useState<boolean>(false);
   const [comments, setComments] = useState<ICommentData[]>();
   const [newComment, setNewComment] = useState<string>("");
   const [isHovered, setIsHovered] = useState(false);
@@ -96,10 +95,6 @@ function Resource({
         error
       );
     }
-  };
-
-  const handleFullViewClicked = () => {
-    setIsFullView((prev) => !prev);
   };
 
   //-----------------------------------put this function into utils
@@ -178,30 +173,14 @@ function Resource({
       </div>
       <h4 className="resource-type">{resourceData.type}</h4>
       {/* -------------------------------if isFullView is true - render full description and all tags */}
-      {isFullView ? (
-        <>
-          <h5 className="resource-description">{resourceData.description}</h5>
-          {resourceData.tags.map((tag) => (
-            <span className="resource-tag" key={tag}>
-              {tag}
-            </span>
-          ))}
-        </>
-      ) : (
-        // ---------------------------------if isFullView is false - render reduced description and 3 tags
-        <>
-          <p className="resource-description">
-            {resourceData.description.slice(0, 30)}...
-          </p>
-          {resourceData.tags
-            .filter((el, index) => index < 3)
-            .map((tag) => (
-              <span className="resource-tag" key={tag}>
-                {tag}
-              </span>
-            ))}
-        </>
-      )}
+      <>
+        <h5 className="resource-description">{resourceData.description}</h5>
+        {resourceData.tags.map((tag) => (
+          <span className="resource-tag" key={tag}>
+            {tag}
+          </span>
+        ))}
+      </>
       {/* -------------------------------------end of conditional rendering for isFullView*/}
       <a className="resource-link-btn" href={resourceData.link}>
         🔗Link to resource
@@ -265,9 +244,6 @@ function Resource({
             </button>
           </div>
         )}
-      <button className="full-view-btn" onClick={handleFullViewClicked}>
-        {isFullView ? "See less" : "Full View"}
-      </button>
       <button
         className="comments-btn"
         onClick={() => handleTopLvCommentBtn(resourceData.id)}
