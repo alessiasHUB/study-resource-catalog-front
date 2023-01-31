@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./navbar.css";
-import logo from "../imgs/logo-grey-v1.png";
+import logo from "../imgs/logo-grey-v3.png";
 
 interface NavBarProps {
   signedInUser: string | undefined;
