@@ -13,11 +13,11 @@ export default function TopRecommendedResources(
       <div className="top-res-container">
         {props.recommendedRes.map((el) => (
           <button key={el.id} className="top-res">
-            <h4 className="top-res-title">{el.title}</h4>
+            <h2 className="top-res-title">{el.title}</h2>
             <p>
               <a href={el.link}>🔗link</a>
             </p>
-            <p className="top-res-type">type: {el.type}</p>
+            <h3 className="top-res-type">type: {el.type}</h3>
             {el.tags.map((el, i) => (
               <span className="top-res-tag" key={i}>
                 {el}
