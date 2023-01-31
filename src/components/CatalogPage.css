@@ -154,7 +154,8 @@
   /* text-shadow: 2px 2px 5px rgb(245, 245, 252); */
 }
 .resource-link-btn {
-  background-color: white;
+  background-color: rgb(8, 5, 148);
+  color: aliceblue;
   padding: 3px;
   border-radius: 3px;
 }

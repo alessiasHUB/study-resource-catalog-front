@@ -29,21 +29,22 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
 
   return (
     <div className="content">
+      <h2>Your Study List</h2>
       {studyListResources.map((resource: IResourceData) => {
         return (
           <div key={resource.id} className="ctn-resource">
             <h2 className="resource-title"> {resource.title}</h2>
-            <p className="resource-post-date"> {dateFormatting(resource.post_date)} </p>            
-              <>
-                <p className="resource-description">{resource.description}</p>
-                {resource.tags.map((tag) => {
-                  return (
-                    <div className="resource-tag" key={tag}>
-                      {tag}
-                    </div>
-                  );
-                })}
-              </>
+            <p className="resource-post-date"> {dateFormatting(resource.post_date)} </p>
+            <>
+              <p className="resource-description">{resource.description}</p>
+              {resource.tags.map((tag) => {
+                return (
+                  <div className="resource-tag" key={tag}>
+                    {tag}
+                  </div>
+                );
+              })}
+            </>
             <div>
               <div>
                 <a className="resource-link-btn" href={resource.link}>🔗Link to resource</a>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./navbar.css";
+import logo from "../imgs/logo-grey-v1.png";
 
 interface NavBarProps {
   signedInUser: string | undefined;
@@ -8,6 +9,7 @@ interface NavBarProps {
 function NavBar(props: NavBarProps): JSX.Element {
   return (
     <nav className="nav">
+      <img className="logo-navbar" src={logo} alt="logo" />
       {props.signedInUser !== undefined ? (
         <>
           <div className="link-container">
