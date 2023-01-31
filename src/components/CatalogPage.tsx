@@ -130,9 +130,7 @@ function CatalogPage({
           <p> Not used but recommended = 🔎</p>
           <p>Not recommended = 💩</p>
         </div> */}
-        {signedInUser && (
-          <Link to="/add_resource">  </Link>
-        )}
+        {signedInUser && <Link to="/add_resource"> </Link>}
         {resources.length > 0 &&
           filterResources(
             searchInput,
