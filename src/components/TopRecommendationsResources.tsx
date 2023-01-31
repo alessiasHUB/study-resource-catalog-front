@@ -23,7 +23,7 @@ export default function TopRecommendedResources(
                 {el}
               </span>
             ))}
-            <p>{el.likes}👍</p>
+            <h4>{el.likes}👍</h4>
           </button>
         ))}
       </div>
