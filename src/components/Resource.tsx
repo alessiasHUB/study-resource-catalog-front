@@ -108,11 +108,11 @@ function Resource({
       case "🌟 Recommended & Used":
         return "🌟";
       case "rec used":
-          return "🌟";
+        return "🌟";
       case "💩 Not Recommended":
         return "💩";
       case "no rec used":
-          return "💩";
+        return "💩";
       case "🔎 Recommended, Not Used":
         return "🔍";
       case "not used promise":
@@ -160,7 +160,7 @@ function Resource({
     getSignedInUserLikes();
     console.log("DELETE dislike");
   }
-console.log("POP",resourceData.usage)
+  console.log("POP", resourceData.usage);
   return (
     <div className="ctn-resource">
       <h2 className="resource-title">💡 {resourceData.title}</h2>
