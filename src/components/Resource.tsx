@@ -281,7 +281,7 @@ function Resource({
         👀 Comments
       </button>
       {comments && (
-        <>
+        <div className="ctn-resource-comments">
           {signedInUser && (
             <div>
               <input
@@ -304,7 +304,7 @@ function Resource({
               ))}
             </ul>
           </div>
-        </>
+        </div>
       )}
       {signedInUser &&
         !checkForResourceInStudyList(resourceData.id, studyListArr) && (
