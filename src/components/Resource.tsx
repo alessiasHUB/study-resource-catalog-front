@@ -172,7 +172,6 @@ function Resource({
         )}
       </div>
       <h4 className="resource-type">{resourceData.type}</h4>
-      {/* -------------------------------if isFullView is true - render full description and all tags */}
       <>
         <h5 className="resource-description">{resourceData.description}</h5>
         {resourceData.tags.map((tag) => (
@@ -181,7 +180,6 @@ function Resource({
           </span>
         ))}
       </>
-      {/* -------------------------------------end of conditional rendering for isFullView*/}
       <a className="resource-link-btn" href={resourceData.link}>
         🔗Link to resource
       </a>
