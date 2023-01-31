@@ -182,15 +182,19 @@ function Resource({
       <h4 className="resource-type">{resourceData.type}</h4>
       <>
         <h5 className="resource-description">{resourceData.description}</h5>
+        <div className="ctn-resource-tags">
         {resourceData.tags.map((tag) => (
           <span className="resource-tag" key={tag}>
             {tag}
           </span>
         ))}
+        </div>
       </>
+
       <a className="resource-link-btn" href={resourceData.link}>
         🔗Link to resource
       </a>
+ 
       {signedInUser !== undefined &&
         !findResourceInLikes(resourceData.id, userLikes) && (
           <div>

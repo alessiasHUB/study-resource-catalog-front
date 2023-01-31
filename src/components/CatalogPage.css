@@ -111,13 +111,17 @@ ul {
 }
 
 .resource-tag {
-  text-align: left;
-  margin: 0.5em;
-  width: fit-content;
   background-color: rgb(28, 34, 34);
+  margin-right: 0.5em;
   padding: 3px;
   border-radius: 3px;
   color: white;
+}
+
+.ctn-resource-tags {
+  text-align: left;
+  margin: 0.5em;
+  width: fit-content;
 }
 
 .full-view-btn {
@@ -163,6 +167,9 @@ ul {
   /* text-shadow: 2px 2px 5px rgb(245, 245, 252); */
 }
 .resource-link-btn {
+  display: block;
+  width: fit-content;
+  margin-left: 0.5rem;
   background-color: rgb(8, 5, 148);
   color: aliceblue;
   padding: 3px;
