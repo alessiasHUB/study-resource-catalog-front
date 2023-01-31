@@ -34,7 +34,10 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
         return (
           <div key={resource.id} className="ctn-resource">
             <h2 className="resource-title"> {resource.title}</h2>
-            <p className="resource-post-date"> {dateFormatting(resource.post_date)} </p>
+            <p className="resource-post-date">
+              {" "}
+              {dateFormatting(resource.post_date)}{" "}
+            </p>
             <>
               <p className="resource-description">{resource.description}</p>
               {resource.tags.map((tag) => {
@@ -47,7 +50,9 @@ export default function StudyListPage(props: StudyListProps): JSX.Element {
             </>
             <div>
               <div>
-                <a className="resource-link-btn" href={resource.link}>🔗Link to resource</a>
+                <a className="resource-link-btn" href={resource.link}>
+                  🔗Link to resource
+                </a>
               </div>
             </div>
           </div>
