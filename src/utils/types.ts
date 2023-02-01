@@ -1,0 +1,16 @@
+export const typesArr: string[] = [
+  "video",
+  "article",
+  "eBook",
+  "podcast",
+  "exercise",
+  "exercise set",
+  "software tool",
+  "course",
+  "diagram",
+  "cheat-sheet",
+  "reference",
+  "resource list",
+  "youtube channel",
+  "organisation",
+];

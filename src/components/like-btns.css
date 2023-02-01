@@ -1,0 +1,25 @@
+.false-like-resource-btn {
+  background-color: white;
+}
+
+.false-dislike-resource-btn {
+  background-color: white;
+}
+
+.liked-resource-btn {
+  background-color: rgb(20, 255, 177);
+}
+
+.disliked-resource-btn {
+  background-color: rgb(231, 20, 55);
+}
+
+.disliked-resource-btn,
+.liked-resource-btn,
+.false-dislike-resource-btn,
+.false-like-resource-btn {
+  font-size: 1.25rem;
+  border: none;
+  padding: 2px;
+  margin: 5px;
+}

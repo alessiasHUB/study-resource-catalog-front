@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+body {
+  background-color: whitesmoke;
+}
+
+.content {
+  padding: 70px 0px 0px 0px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -11,6 +18,11 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 .App-header {
@@ -35,4 +47,40 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* //update for thurs */
+
+.add-res-desc {
+  width: 430px;
+  height: 300px;
+  margin: 1px;
+}
+.add-res-title {
+  width: 428px;
+}
+.add-res-link {
+  width: 428px;
+  margin: 3px;
+}
+.add-res-tags {
+  margin: 1px;
+}
+.add-res-types {
+  margin: 1px;
+}
+.add-res-usage {
+  margin: 1px;
+}
+.add-res-submit-btn {
+  background-color: black;
+  font-size: 16px;
+  color: white;
+  border-radius: 3px;
+  border-style: none;
+  padding: 5px;
+  margin: 4px 0px 0px 0px;
+}
+.add-res-submit-btn:hover {
+  background-color: rgb(13, 24, 80);
 }

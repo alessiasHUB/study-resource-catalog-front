@@ -1,0 +1,39 @@
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgba(0, 149, 255, 0.913);
+  z-index: 1; /* to make sure it stays on top of other elements */
+  height: 60px;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  font-size: 16px;
+}
+.nav-link-end-no-user {
+  margin-right: 190px;
+}
+.nav-link-end {
+  margin-right: 60px;
+}
+.nav-link {
+  margin: 0px 20px 0px 0px;
+}
+.signed-in-user {
+  margin-right: 30px;
+}
+.signed-in-icon {
+  height: 16px;
+  margin-right: 4px;
+}
+
+.logo-navbar {
+  height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 20px;
+  margin-top: 5px;
+}
